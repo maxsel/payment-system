@@ -1,0 +1,462 @@
+table {
+    border-collapse: collapse;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    margin: 0.67em 0;
+    font-weight: bold;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.layout-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    border: solid;
+}
+
+.layout-table .header-tr {
+    height: 5%;
+    border-bottom: solid;
+}
+
+.layout-table .body-tr {
+    vertical-align: text-top;
+}
+
+.layout-table .body-tr .menu-td {
+    width: 20%;
+    padding-top: 5px;
+    position: fixed;
+    border: hidden;
+}
+
+.layout-table .body-tr .body-td {
+    width: 80%;
+    height: 100%;
+    border-left: groove;
+    padding-top: 5px;
+}
+
+.layout-table .footer-tr {
+    height: 3%;
+    border-top: solid;
+}
+
+.layout-table .footer-tr .footer-text {
+    text-align: center;
+}
+
+.login-box {
+    width: 300px;
+    padding: 20px;
+    margin: 100px auto;
+    background: #fff;
+}
+
+.login-box .login-form {
+    align-content: center;
+}
+
+.login-box .login-form table {
+    border: hidden;
+}
+
+.login-box .login-form .block-center {
+    width:250px;
+    height:150px;
+    background-color:white;
+    border:hidden;
+    position:relative;
+}
+
+.login-box .login-form .block-center .login-table {
+    position:absolute;
+    bottom:0;
+    width: 100%;
+}
+
+.login-box .login-form .block-center .login-table .login-button {
+    width:70px;
+    height:30px;
+    float: right;
+}
+
+.login-box .login-form .block-center .login-messages {
+    position:absolute;
+    top:0;
+    width: 100%;
+}
+
+.login-box .login-form .block-center .login-messages .error {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+}
+
+.login-box .login-form .block-center .login-messages .msg {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border: 1px solid #bce8f1;
+    text-align: center;
+}
+
+.header {
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 20px;
+}
+
+.header .lang {
+    padding: 0 0 0 0;
+    float: right;
+    margin: 0 2px 0 0;
+}
+
+.header .logout-form {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    float: right;
+}
+
+.header .logout-form .greeting {
+    font-weight: bold;
+}
+
+.header .logout-form .logout-button {
+    margin-left: 40px;
+}
+
+.header .title {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.header h1 {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.sidebar-content {
+    background: #666;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin: 0 0 0 0;
+    width: 204px;
+}
+
+.sidebar-content .menu-list {
+    vertical-align: top;
+    background:  #fff;
+    padding: 1px;
+}
+
+.content {
+    text-align: center;
+    height: 83%;
+    width: 99%;
+    margin-top: 45px;
+    padding-left: 1%;
+}
+
+.content .filter-table {
+    margin: 0 auto;
+}
+
+.content .news-table {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.content .news-table .news-in-table {
+    padding-top: 50px;
+    display:block;
+}
+
+.content .news-table .news-in-table .news-header {
+
+}
+
+.content .news-table .news-in-table .news-header .title {
+    font-weight: bold;
+}
+
+.content .news-table .news-in-table .news-header .author {
+    float: right;
+    padding-right: 30px;
+}
+
+.content .news-table .news-in-table .news-header .date {
+    float: right;
+    padding-right: 30px;
+    text-decoration: underline;
+}
+
+.content .news-table .news-in-table .news-text {
+    margin-top: 10px;
+    display:block;
+}
+
+.content .news-table .news-in-table .news-info {
+    float: right;
+}
+
+.content .news-table .news-in-table .news-info .tags{
+    padding-right: 30px;
+    color: gray;
+}
+
+.content .news-table .news-in-table .news-info .comments {
+    padding-right: 30px;
+    color: red;;
+}
+
+.content .news-table .news-in-table .news-info .edit-link {
+    padding-right: 30px;
+    color: blue;;
+}
+
+.content .news-table .news-in-table .news-info .delete-checkbox {
+    padding-right: 30px;
+    color: blue;;
+}
+
+.content .news-table .delete-tr {
+    height: 80px;
+    vertical-align: top;
+}
+
+.content .news-table .delete-tr .delete-news-btn {
+    width: 100px;
+    height: 30px;
+    float: right;
+    text-align:center;
+    margin-right: 30px;
+}
+
+.pagination {
+    background-color: #999999;
+    text-align: center;
+    vertical-align: middle;
+    /*height: 10%;*/
+    height: 65px;
+    white-space: nowrap;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.pagination .page-link .page-button {
+    width: 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.pagination .helper-inline {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.news-container {
+    width: 100%;
+}
+
+.news-container .news-content {
+    margin: 20px 30px 0 30px;
+    text-align: justify;
+}
+
+.news-container .news-content .news-title {
+    font-size: 18px;
+    font-weight: bold;
+    width: 70%;
+}
+
+.news-container .news-content .news-author {
+}
+
+.news-container .news-content .news-date {
+    float: right;
+    padding-right: 30px;
+    text-decoration: underline;
+}
+
+.news-container .news-content .news-fulltext {
+    font-size:16px;
+    display: block;
+    margin:20px 0 20px 0;
+}
+
+.news-container .news-content .comment {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.news-container .news-content .comment .comment-date {
+    text-decoration: underline;
+}
+
+.news-container .news-content .comment .comment-box {
+    background-color: #999999;
+    width: 50%;
+    padding-bottom: 15px;
+    margin-left: 10px;
+}
+
+.news-container .news-content .comment .comment-box .delete-comment {
+}
+
+.news-container .news-content .comment .comment-box .delete-comment .del-comm-link {
+    text-decoration: none;
+    float: right;
+}
+
+.news-container .news-content .comment .comment-box .delete-comment .del-comm-link .del-comm-button {
+    font-size: 16px;
+    width: 20px;
+    height: 20px;
+    padding: 0 0 0 0;
+}
+
+.news-container .news-content .comment .comment-box .comment-text {
+}
+
+.news-container .news-content .post-form {
+}
+
+.news-container .news-content .post-form .post-comm-text {
+    width: 100%;
+    padding-left: 10px;
+}
+
+.news-container .news-content .post-form .post-button {
+    padding-left: 79.5%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+    height: 30px;
+}
+
+.news-container .news-content .post-form .post-button .post-button-text {
+    width: 100%;
+    height: 100%;
+}
+
+.prev-next-container {
+    height: 10%;
+    vertical-align: bottom;
+}
+
+.prev-next-container .prev-next {
+    width: 77%;
+    position: absolute;
+    bottom: 5%;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.prev-next-container .prev-next .prev {
+    float: left;
+    background-color: white;
+}
+
+.prev-next-container .prev-next .next {
+    float: right;
+    background-color: white;
+}
+
+.edit-news-container {
+    width: 100%;
+}
+
+.edit-news-container .edit-news-content {
+    margin: 20px 30px 0 30px;
+    width: 64.5%;
+    text-align: justify;
+}
+
+.edit-news-container .edit-news-content .news-input-fields td {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 70%;
+    padding-bottom: 10px;
+}
+
+.edit-news-container .edit-news-content .news-dropdown-fields {
+    margin: 20px 30px 20px 110px;
+    text-align: justify;
+}
+
+.edit-news-container .edit-news-content .news-save-button {
+    float: right;
+    width: 80px;
+    height: 45px;
+}
+
+.submitLink {
+    padding:0;
+    background-color:transparent;
+    text-decoration:underline;
+    border:none;
+    border:0;
+    color:blue;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:inherit;
+}
+
+.submitLink::-moz-focus-inner {
+    border:0;
+    padding:0;
+}
+
+.items-container {
+    width: 100%;
+}
+
+.items-container .items-content {
+    margin: 20px 30px 0 30px;
+    text-align: justify;
+}
+
+.items-container .items-content .items-fields td {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.items-container .items-content .items-fields .add-item-tr td {
+    padding-top: 40px;
+}
+
+.items-container .items-content .items-fields .edit-item {
+    padding-left: 30px;
+}
+
+
+.back-container {
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.back-container .back {
+
+}
