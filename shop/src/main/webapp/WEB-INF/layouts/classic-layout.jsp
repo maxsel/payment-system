@@ -12,7 +12,6 @@
 <tiles:insertAttribute name="header"/>
 <table border="1" class="layout-table" style="margin-top: 5%;margin-bottom:1.9%;">
     <tr class="body-tr">
-        <td class="menu-td"><tiles:insertAttribute name="menu"/></td>
         <td class="body-td"><tiles:insertAttribute name="body"/></td>
     </tr>
 </table>

@@ -4,6 +4,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<span>
+    <h1>QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ</h1>
+    <c:forEach items="${categories}" var="category">
+        <span>
+                ${category.name}
+        </span>
+    </c:forEach>
+</span>
 <table id="content" cellspacing="50">
     <tbody>
     <jsp:useBean id="now" class="java.util.Date" />

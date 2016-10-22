@@ -1,6 +1,8 @@
 package com.tofi.shop.controller;
 
 import com.tofi.shop.domain.Item;
+import com.tofi.shop.domain.ItemCategory;
+import com.tofi.shop.service.CategoryService;
 import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
@@ -22,16 +24,24 @@ public class ItemsListController {
     private static final Logger LOG = LogManager.getLogger(ItemsListController.class);
 
     private final ItemService itemService;
+    private final CategoryService categoryService;
 
     @Inject
-    public ItemsListController(ItemService itemService) {
+    public ItemsListController(ItemService itemService, CategoryService categoryService) {
         Assert.notNull(itemService, "ItemService must be not null!");
+        Assert.notNull(categoryService, "CategoryService must be not null!");
         this.itemService = itemService;
+        this.categoryService = categoryService;
     }
 
     @ModelAttribute("items")
     public List<Item> populateItemsList() throws ServiceException {
         return new LinkedList<>(itemService.findAll());
+    }
+
+    @ModelAttribute("categories")
+    public List<ItemCategory> populateCategoriesList() throws ServiceException {
+        return new LinkedList<>(categoryService.findAll());
     }
 
     @ModelAttribute("item")
