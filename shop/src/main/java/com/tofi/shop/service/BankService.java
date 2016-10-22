@@ -1,7 +1,9 @@
 package com.tofi.shop.service;
 
-public interface BankService {
-    String pay(String clientId, long amount);
+import java.io.IOException;
 
-    boolean userExists(String cardId);
+public interface BankService {
+    boolean pay(String cardNumber, String cvv, long amount) throws IOException;
+
+    boolean userExists(String cardNumber, String cvv) throws IOException;
 }
