@@ -2,11 +2,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/styles.css" />" />
-
 <html>
 <head>
     <title><tiles:getAsString name="title"/></title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap/css/bootstrap.css" />" />
 </head>
 <body>
 <tiles:insertAttribute name="header"/>

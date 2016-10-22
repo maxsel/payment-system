@@ -4,8 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
-
 <span>
     <h1>CART:</h1>
     <c:forEach items="${cart_items}" var="cart_item">
