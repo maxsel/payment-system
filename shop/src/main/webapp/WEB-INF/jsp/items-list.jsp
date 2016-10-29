@@ -15,9 +15,6 @@
         </div>
     </c:forEach>
 
-    ${_csrf.parameterName}
-    ${_csrf.token}
-
     <script>
         $(document).ready(()=> {
             $(".addToCart").click((obj) => {
