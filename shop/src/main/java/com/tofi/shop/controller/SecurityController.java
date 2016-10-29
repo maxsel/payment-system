@@ -18,18 +18,20 @@ public class SecurityController {
             @RequestParam(value = "logout", required = false) String logout) {
 
         ModelAndView model = new ModelAndView();
-        model.setViewName("login");
+        model.setViewName("home");
         if (error != null) {
             model.addObject("error", "Invalid username and password!");
         }
         if (logout != null) {
-            model.addObject("msg", "You've been logged out successfully.");
+
+//            model.addObject("msg", "You've been logged out successfully.");
+            model.setViewName("redirect:/");
         }
         return model;
     }
 
     @RequestMapping("/logout")
     public String logout() {
-        return "redirect:/login?logout=true";
+        return "redirect:/";
     }
 }

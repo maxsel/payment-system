@@ -22,7 +22,7 @@
                 password-parameter="password" />
         <logout
                 logout-url="/logout"
-                logout-success-url="/login"
+                logout-success-url="/"
                 invalidate-session="true"
                 delete-cookies="JSESSIONID" />
     </http>

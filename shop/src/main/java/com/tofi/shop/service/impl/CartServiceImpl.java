@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService{
-    private List<ItemInCart> _itemsInCart = new ArrayList<ItemInCart>();
+    private List<ItemInCart> _itemsInCart = new ArrayList<>();
 
     @Override
     public void addItem(Item item) {
@@ -19,7 +19,7 @@ public class CartServiceImpl implements CartService{
         if (itemInCart == null) {
             addItemInCart(new ItemInCart(item, 1));
         }
-        else{
+        else {
             itemInCart.incAmount();
         }
     }

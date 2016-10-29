@@ -19,7 +19,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/news-list")
+@RequestMapping("/items-list")
 public class ItemsListController {
     private static final Logger LOG = LogManager.getLogger(ItemsListController.class);
 
@@ -54,22 +54,5 @@ public class ItemsListController {
             throws ServiceException {
         items = itemService.findAll();
         return "items-list";
-    }
-
-    @RequestMapping(value = "/update")
-    public String update(@ModelAttribute("item") Item item,
-                         BindingResult bindingResult){
-        try {
-            LOG.debug("Item to update: " + item);
-            if (bindingResult.hasErrors()) {
-                LOG.debug("There are binding errors:" + bindingResult.getAllErrors());
-                return "edit-items";
-            }
-            itemService.update(item);
-        } catch (ServiceException e) {
-            LOG.error(e);
-            return "error";
-        }
-        return "redirect:/admin/items/edit-items";
     }
 }

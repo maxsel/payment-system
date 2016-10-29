@@ -30,7 +30,7 @@
             <security:authorize url="/admin/**">
                 <div>
                     <form:form action="${rootUrl}logout" method="POST">
-                        <div>
+                        <div style="color: white;">
                             <spring:message code="header.hello"/>,
                             <security:authentication property="principal.username"/>
                         </div>
@@ -40,52 +40,30 @@
                     </form:form>
                 </div>
             </security:authorize>
+            <security:authorize access="isAnonymous()">
+                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+
+                    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="loginmodal-container">
+                                <h1>Login to Your Account</h1><br>
+                                <form action="<c:url value="/j_spring_security_check" />" method='POST'>
+                                    <input type="text" name="username" placeholder="Username" id="username" value="admin">
+                                    <input type="password" name="password" placeholder="Password" id='password' value="admin">
+                                    <input type="submit" name="login" class="login loginmodal-submit" value="<spring:message code="login.login" />">
+
+                                    <input type="hidden" name="${_csrf.parameterName}"
+                                           value="${_csrf.token}"/>
+                                </form>
+
+                                <div class="login-help">
+                                    <a href="<c:url value="/register"/>">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </security:authorize>
         </ul>
     </div>
 </nav>
-<%--
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-head">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-0">
-                <div class="icon-bar"></div>
-                <div class="icon-bar"></div>
-                <div class="icon-bar"></div>
-            </button>
-            <div class="navbar-brand">
-                <spring:message code="header.text"/> - <spring:message code="header.administration"/>
-            </div>
-        </div>
-        <div class="navbar-collapse collapse" id="bs-navbar-collapse-0">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <security:authorize url="/admin/**">
-                        <div>
-                            <form:form action="${rootUrl}logout" method="POST">
-                                <div>
-                                    <spring:message code="header.hello"/>,
-                                    <security:authentication property="principal.username"/>
-                                </div>
-                                <div>
-                                    <input type="submit" value="<spring:message code="header.logout"/>"/>
-                                </div>
-                            </form:form>
-                        </div>
-                    </security:authorize>
-                </li>
-                <li>
-                    <a href="?lang=en_US">EN</a>&nbsp;
-                </li>
-                <li>
-                    <a href="?lang=ru_RU">RU</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
---%>
