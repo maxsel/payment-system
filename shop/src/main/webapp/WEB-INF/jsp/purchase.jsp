@@ -7,7 +7,7 @@
 
 <c:url var="rootUrl" value="/user" />
 
-<span>
+<div>
     <form:form method="post" action="${rootUrl}/order" >
         <h1>Order:</h1>
         <c:forEach items="${cart_items}" var="cart_item">
@@ -17,4 +17,4 @@
         <input type="text" value="CVV">
         <input type="submit" value="Order">
     </form:form>
-</span>
+</div>

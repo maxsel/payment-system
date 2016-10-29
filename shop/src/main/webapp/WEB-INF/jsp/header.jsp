@@ -6,72 +6,47 @@
 
 <c:url var="rootUrl" value="/"/>
 
-<div class="container">
-
-    <div class="row">
-
-        <div class="col-sm-3">
-            <h1>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-head">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <div class="icon-bar"></div>
+                <div class="icon-bar"></div>
+                <div class="icon-bar"></div>
+            </button>
+            <div class="navbar-brand">
                 <spring:message code="header.text"/> - <spring:message code="header.administration"/>
-            </h1>
-        </div>
-
-        <div class="col-sm-3">
-            <div >
-                <security:authorize url="/admin/**">
-                    <div class="logout-form">
-                        <form:form action="${rootUrl}logout" method="POST">
-                        <span class="greeting">
-                            <spring:message code="header.hello"/>,
-                            <security:authentication property="principal.username"/>
-                        </span>
-                            <span class="logout-button">
-                            <input type="submit" value="<spring:message code="header.logout"/>"/>
-                        </span>
-                        </form:form>
-                    </div>
-                </security:authorize>
-            </div>
-
-            <div >
-                <a href="?lang=en_US">EN</a>&nbsp;
-                <a href="?lang=ru_RU">RU</a>
             </div>
         </div>
-    </div>
-</div>
-
-<!--header style="position: fixed; top:0; width: 100%; background-color: white">
-    <table border="1"
-           style="width: 98.8%;border-collapse:collapse;border:solid;">
-        <tr style="height:3%;border-top:solid;">
-            <td>
-                <div class="header">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>Home</li>
+                <li>About</li>
+                <li>Contact</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
                     <security:authorize url="/admin/**">
-                        <div class="logout-form">
+                        <div>
                             <form:form action="${rootUrl}logout" method="POST">
-                                <span class="greeting">
+                                <div>
                                     <spring:message code="header.hello"/>,
                                     <security:authentication property="principal.username"/>
-                                </span>
-                                <span class="logout-button">
-                                    <input type="submit"
-                                       value="<spring:message code="header.logout"/>"/>
-                                </span>
+                                </div>
+                                <div>
+                                    <input type="submit" value="<spring:message code="header.logout"/>"/>
+                                </div>
                             </form:form>
                         </div>
                     </security:authorize>
-                    <span class="title">
-                        <h1>
-                            <spring:message code="header.text"/> - <spring:message code="header.administration"/>
-                        </h1>
-                    </span>
-                    <span class="lang">
-                        <a href="?lang=en_US">EN</a>&nbsp;
-                        <a href="?lang=ru_RU">RU</a>
-                    </span>
-                </div>
-            </td>
-        </tr>
-    </table>
-</--header-->
+                </li>
+                <li>
+                    <a href="?lang=en_US">EN</a>&nbsp;
+                </li>
+                <li>
+                    <a href="?lang=ru_RU">RU</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -4,10 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<span>
+<div>
     <h1>ORDERS:</h1>
     <c:forEach items="${orders}" var="order">
         <h2>ID: ${order.id}</h2>
         <h2>STATUS: ${order.status.name}</h2>
     </c:forEach>
-</span>
+</div>
