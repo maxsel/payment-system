@@ -47,5 +47,5 @@ public interface CategoryService {
      * @return an item with the given id.
      * @throws ServiceException if an error occurred when performing operation
      */
-    ItemCategory findById(Long id) throws ServiceException;
+    ItemCategory findById(Integer id) throws ServiceException;
 }

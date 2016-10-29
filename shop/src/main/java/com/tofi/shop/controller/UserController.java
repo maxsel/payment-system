@@ -2,7 +2,6 @@ package com.tofi.shop.controller;
 
 
 import com.tofi.shop.domain.*;
-import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +47,15 @@ public class UserController {
             throws ServiceException {
         return "orders-list";
     }
+    
+    @ModelAttribute("cart_items")
+    public List<ItemInCart> populateCardItemsList() throws ServiceException {
+        ArrayList<ItemInCart> itemInCarts = new ArrayList<>();
+        itemInCarts.add(new ItemInCart(new Item(1, "titile","dedesc", 50,
+                new ItemCategory(1, "Available"),
+                new ItemStatus(1, "NEW")), 1));
+        return new LinkedList<>(itemInCarts);
+    }
 
     @RequestMapping("/cart")
     public String showCartPage() throws ServiceException {
@@ -58,9 +65,9 @@ public class UserController {
     @RequestMapping("/purchase")
     public String showPurchasePage(@ModelAttribute("itemsInCart") ArrayList<ItemInCart> itemInCarts)
             throws ServiceException {
-        itemInCarts.add(new ItemInCart(new Item(1L, "titile","dedesc", 50.23,
-                new ItemCategory(1L, "Available"),
-                new ItemStatus(1L, "NEW")), 1));
+        itemInCarts.add(new ItemInCart(new Item(1, "titile","dedesc", 50,
+                new ItemCategory(1, "Available"),
+                new ItemStatus(1, "NEW")), 1));
         return "purchase";
     }
 

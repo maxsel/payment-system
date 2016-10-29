@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 @SuppressWarnings("unused")
 public class Item implements Serializable {
-    private Long id;
+    private Integer id;
     private String title;
     private String description;
-    private Double price;
+    private Integer price;
     // TODO: image???
     private ItemCategory category;
     private ItemStatus status;
@@ -15,8 +15,8 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(Long id, String title, String description,
-                Double price, ItemCategory category, ItemStatus status) {
+    public Item(Integer id, String title, String description,
+                Integer price, ItemCategory category, ItemStatus status) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -25,11 +25,11 @@ public class Item implements Serializable {
         this.status = status;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,11 +49,11 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 

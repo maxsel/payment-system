@@ -1,25 +1,27 @@
 package com.tofi.shop.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class ItemStatus implements Serializable {
-    private Long id;
+    private Integer id;
     private String name;
+    private List<Item> items;
 
     public ItemStatus() {
     }
 
-    public ItemStatus(Long id, String name) {
+    public ItemStatus(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,6 +31,14 @@ public class ItemStatus implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     @Override
