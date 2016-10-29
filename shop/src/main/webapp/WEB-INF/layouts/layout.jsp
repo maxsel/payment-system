@@ -23,7 +23,10 @@
     <div class="container body-content">
         <tiles:insertAttribute name="body"/>
         <hr />
-        <tiles:insertAttribute name="footer"/>
+
+
+
     </div>
+    <tiles:insertAttribute name="footer"/>
 </body>
 </html>
