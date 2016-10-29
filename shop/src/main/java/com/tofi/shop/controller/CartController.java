@@ -6,10 +6,7 @@ import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -36,11 +33,12 @@ public class CartController {
         return "cart";
     }
 
-    @RequestMapping("/add")
-    public void addItemToCart(@RequestParam(value = "id", defaultValue = "-1") String itemId ) throws ServiceException {
+    @PostMapping("/add")
+    public @ResponseBody String addItemToCart(@RequestParam(value = "id", defaultValue = "-1") String itemId ) throws ServiceException {
         long id = Long.parseLong(itemId);
-        if (id == -1) return;
+        if (id == -1) return "FAIL";
         Item item = this.itemService.findById(id);
         this.cartService.addItem(item);
+        return "OK";
     }
 }

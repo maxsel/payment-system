@@ -19,7 +19,7 @@ public class UserController {
     private static final Logger LOG = LogManager.getLogger(UserController.class);
 
     public UserController() {
-        
+
     }
 
     @ModelAttribute("user")

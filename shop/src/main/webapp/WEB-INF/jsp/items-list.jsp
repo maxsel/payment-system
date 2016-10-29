@@ -11,7 +11,42 @@
             ${item.id}
             ${item.title}
             ${item.description}
-            <a href="cart/add?id=${item.id}"> add to cart</a>
+            <input type="button" class="addToCart" value="${item.id}">
         </div>
     </c:forEach>
+
+    ${_csrf.parameterName}
+    ${_csrf.token}
+
+    <script>
+        $(document).ready(()=> {
+            $(".addToCart").click(() => {
+
+
+                var csrfParameter = '${_csrf.parameterName}';
+                var csrfToken = '${_csrf.token}';
+                var csrfHeader = '${_csrf.headerName}';
+
+                var data = {};
+                var headers = {};
+                console.log(csrfParameter);
+                console.log(csrfToken);
+                console.log(csrfHeader);
+                data[csrfParameter] = csrfToken;
+                headers[csrfHeader] = csrfToken;
+                console.log(data);
+                console.log(headers);
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: 'cart/add?id=1',
+                    data: data,
+                    headers: headers,
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+            });
+        });
+    </script>
 </div>
