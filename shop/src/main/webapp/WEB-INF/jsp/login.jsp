@@ -5,40 +5,25 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div>
-    <form action="<c:url value="/j_spring_security_check" />" method='POST'>
-        <div>
-            <div>
-                <c:if test="${not empty error}">
-                    <div class="error">${error}</div>
-                </c:if>
-                <c:if test="${not empty msg}">
-                    <div class="msg">${msg}</div>
-                </c:if>
-            </div>
+    <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
 
-            <div>
-                <label for="username">
-                    <spring:message code="login.login_input"/>:
-                </label>
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="loginmodal-container">
+                <h1>Login to Your Account</h1><br>
+                <form action="<c:url value="/j_spring_security_check" />" method='POST'>
+                    <input type="text" name="username" placeholder="Username" id="username">
+                    <input type="password" name="password" placeholder="Password" id='password'>
+                    <input type="submit" name="login" class="login loginmodal-submit" value="<spring:message code="login.login" />">
 
-                <input type='text' name='username' id='username'
-                       value=''/>
+                    <input type="hidden" name="${_csrf.parameterName}"
+                           value="${_csrf.token}"/>
+                </form>
 
-                <label for="password">
-                    <spring:message code="login.password_input"/>:
-                </label>
-
-                <input type='password' name='password'
-                       id='password'/>
-
-
-                <input class="login-button" name="submit"
-                       type="submit"
-                       value="<spring:message code="login.login" />"/>
-
-                <input type="hidden" name="${_csrf.parameterName}"
-                       value="${_csrf.token}"/>
+                <div class="login-help">
+                    <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
