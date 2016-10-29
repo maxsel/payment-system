@@ -19,9 +19,9 @@
 
     <script>
         $(document).ready(()=> {
-            $(".addToCart").click(() => {
+            $(".addToCart").click((obj) => {
 
-
+                console.log(obj);
                 var csrfParameter = '${_csrf.parameterName}';
                 var csrfToken = '${_csrf.token}';
                 var csrfHeader = '${_csrf.headerName}';
@@ -38,7 +38,7 @@
                 $.ajax({
                     type: "POST",
                     async: false,
-                    url: 'cart/add?id=1',
+                    url: 'cart/add?id=' + obj.currentTarget.value,
                     data: data,
                     headers: headers,
                     success: function (res) {
