@@ -8,17 +8,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private ArrayList<ItemCategory> list = new ArrayList<>();
     {
-        list.add(new ItemCategory(1L, "cat1"));
-        list.add(new ItemCategory(2L, "cat2"));
-        list.add(new ItemCategory(3L, "cat3"));
-        list.add(new ItemCategory(4L, "cat4"));
-        list.add(new ItemCategory(5L, "cat5"));
+        list.add(new ItemCategory(1, "cat1"));
+        list.add(new ItemCategory(2, "cat2"));
+        list.add(new ItemCategory(3, "cat3"));
+        list.add(new ItemCategory(4, "cat4"));
+        list.add(new ItemCategory(5, "cat5"));
     }
 
     @Override
@@ -38,13 +39,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<ItemCategory> findAll() throws ServiceException {
-        System.out.println(list);
         return list;
     }
 
     @Override
-    public ItemCategory findById(Long id) throws ServiceException {
-        Optional<ItemCategory> result = list.stream().filter(cat -> cat.getId() == id).findFirst();
+    public ItemCategory findById(Integer id) throws ServiceException {
+        Optional<ItemCategory> result = list.stream().filter(cat -> Objects.equals(cat.getId(), id)).findFirst();
         if (result.isPresent()) {
             return result.get();
         }

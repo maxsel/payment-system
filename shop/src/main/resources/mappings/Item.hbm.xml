@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tofi.shop.domain">
+    <class name="Item" table="item">
+        <id name="id" type="int" unsaved-value="null">
+            <column name="ITEM_ID"/>
+            <generator class="identity" />
+        </id>
+        <property name="title" type="string">
+            <column name="ITEM_TITLE" sql-type="nvarchar2" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="ITEM_DESC" />
+        </property>
+        <property name="price" type="int">
+            <column name="ITEM_PRICE" />
+        </property>
+        <many-to-one name="category" class="ItemCategory" not-null="true" update="false" lazy="false">
+            <column name="item_cat_id" />
+        </many-to-one>
+        <many-to-one name="status" class="ItemStatus" not-null="true" update="false" lazy="false">
+            <column name="item_status_id" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
