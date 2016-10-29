@@ -3,17 +3,25 @@ package com.tofi.shop.service.impl;
 import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemInCart;
 import com.tofi.shop.service.CartService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CartServiceImpl implements CartService{
     private List<ItemInCart> _itemsInCart = new ArrayList<ItemInCart>();
 
     @Override
     public void addItem(Item item) {
-        addItemInCart(new ItemInCart(item, 0));
+        ItemInCart itemInCart = getItemInCartByItem(item);
+        if (itemInCart == null) {
+            addItemInCart(new ItemInCart(item, 1));
+        }
+        else{
+            itemInCart.incAmount();
+        }
     }
 
     @Override
@@ -45,6 +53,10 @@ public class CartServiceImpl implements CartService{
         _itemsInCart.clear();
     }
 
+    public List<ItemInCart> getItemsInCart(){
+        return this._itemsInCart;
+    }
+
     private void removeItemInCart(ItemInCart itemInCart){
         _itemsInCart.remove(itemInCart);
     }
@@ -54,7 +66,7 @@ public class CartServiceImpl implements CartService{
     }
 
     private ItemInCart getItemInCartByItem(Item item){
-        Optional<ItemInCart> itemInCart = _itemsInCart.stream().filter(iic -> iic.getItem() == item).findFirst();
+        Optional<ItemInCart> itemInCart = _itemsInCart.stream().filter(iic -> iic.getItem().equals(item)).findFirst();
         if (itemInCart.isPresent()) return itemInCart.get();
         return null;
     }

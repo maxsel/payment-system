@@ -12,6 +12,10 @@ public class ItemInCart {
         this.amount = amount;
     }
 
+    public void incAmount(){
+        this.amount ++;
+    }
+
     public Item getItem() {
         return item;
     }
@@ -26,5 +30,11 @@ public class ItemInCart {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString(){
+        return "{Clinent = " + this.item.toString() + " }\n" +
+                ", Amount = " + this.amount;
     }
 }

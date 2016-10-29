@@ -19,8 +19,8 @@ public class UserController {
     private static final Logger LOG = LogManager.getLogger(UserController.class);
 
     public UserController() {
+        
     }
-
 
     @ModelAttribute("user")
     public User populateUserDTO() throws ServiceException {
@@ -47,7 +47,7 @@ public class UserController {
             throws ServiceException {
         return "orders-list";
     }
-
+    
     @ModelAttribute("cart_items")
     public List<ItemInCart> populateCardItemsList() throws ServiceException {
         ArrayList<ItemInCart> itemInCarts = new ArrayList<>();

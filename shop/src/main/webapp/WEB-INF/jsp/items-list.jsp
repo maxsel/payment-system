@@ -8,7 +8,10 @@
 <div>
     <c:forEach items="${items}" var="item">
         <div>
-            ${item}
+            ${item.id}
+            ${item.title}
+            ${item.description}
+            <a href="cart/add?id=${item.id}"> add to cart</a>
         </div>
     </c:forEach>
 </div>
