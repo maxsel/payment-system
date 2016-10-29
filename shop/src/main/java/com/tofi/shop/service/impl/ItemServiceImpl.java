@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
      * {@inheritDoc}
      */
     @Override
-    public Long create(Item item) throws ServiceException {
+    public Integer create(Item item) throws ServiceException {
         try {
             return itemDAO.insert(item);
         } catch (DAOException e) {
@@ -65,7 +65,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @SuppressWarnings("Duplicates")
     @Transactional(rollbackFor = ServiceException.class)
-    public void delete(Long id) throws ServiceException {
+    public void delete(Integer id) throws ServiceException {
         try {
             itemDAO.delete(id);
         } catch (DAOException e) {
@@ -91,7 +91,7 @@ public class ItemServiceImpl implements ItemService {
      * {@inheritDoc}
      */
     @Override
-    public Item findById(Long id) throws ServiceException {
+    public Item findById(Integer id) throws ServiceException {
         try {
             return itemDAO.findById(id);
         } catch (DAOException e) {

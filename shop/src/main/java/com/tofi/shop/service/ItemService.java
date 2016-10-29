@@ -19,7 +19,7 @@ public interface ItemService {
      * @return id of created item.
      * @throws ServiceException if an error occurred when performing operation
      */
-    Long create(Item item) throws ServiceException;
+    Integer create(Item item) throws ServiceException;
 
     /**
      * Edits existing item by id.
@@ -35,7 +35,7 @@ public interface ItemService {
      * @param id id of item to delete.
      * @throws ServiceException if an error occurred when performing operation
      */
-    void delete(Long id) throws ServiceException;
+    void delete(Integer id) throws ServiceException;
 
     /**
      * Retrieves list of all existing items.
@@ -52,5 +52,5 @@ public interface ItemService {
      * @return an item with the given id.
      * @throws ServiceException if an error occurred when performing operation
      */
-    Item findById(Long id) throws ServiceException;
+    Item findById(Integer id) throws ServiceException;
 }

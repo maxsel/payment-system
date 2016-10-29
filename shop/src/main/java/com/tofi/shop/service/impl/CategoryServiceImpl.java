@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void delete(Long id) throws ServiceException {
+    public void delete(Integer id) throws ServiceException {
 
     }
 

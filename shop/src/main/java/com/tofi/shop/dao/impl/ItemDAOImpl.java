@@ -38,9 +38,9 @@ public class ItemDAOImpl implements ItemDAO {
      */
     @Override
     @Transactional
-    public Long insert(Item item) throws DAOException {
+    public Integer insert(Item item) throws DAOException {
         Session session = sessionFactory.getCurrentSession();
-        return (Long) session.save(item);
+        return (Integer) session.save(item);
     }
 
     /**
@@ -64,7 +64,7 @@ public class ItemDAOImpl implements ItemDAO {
      */
     @Override
     @Transactional
-    public void delete(Long id) throws DAOException {
+    public void delete(Integer id) throws DAOException {
         Session session = sessionFactory.getCurrentSession();
         session.delete(findById(id));
     }
@@ -93,7 +93,7 @@ public class ItemDAOImpl implements ItemDAO {
      */
     @Override
     @Transactional(readOnly = true)
-    public Item findById(Long id) throws DAOException {
+    public Item findById(Integer id) throws DAOException {
         Session session = sessionFactory.getCurrentSession();
         return (Item) session.get(Item.class, id);
     }

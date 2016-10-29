@@ -30,7 +30,7 @@ public interface CategoryService {
      * @param id id of item to delete.
      * @throws ServiceException if an error occurred when performing operation
      */
-    void delete(Long id) throws ServiceException;
+    void delete(Integer id) throws ServiceException;
 
     /**
      * Retrieves list of all existing items.
