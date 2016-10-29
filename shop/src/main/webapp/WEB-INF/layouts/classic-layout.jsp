@@ -26,9 +26,7 @@
     <div class="container body-content">
         <tiles:insertAttribute name="body"/>
         <hr />
-        <footer>
-            <tiles:insertAttribute name="footer"/>
-        </footer>
+        <tiles:insertAttribute name="footer"/>
     </div>
 </body>
 </html>

@@ -2,6 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
-<div class="footer">
+<div class="footer" id="footer">
     <spring:message code="footer.text"/>
 </div>

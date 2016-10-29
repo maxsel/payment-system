@@ -12,8 +12,8 @@
             <div class="loginmodal-container">
                 <h1>Login to Your Account</h1><br>
                 <form action="<c:url value="/j_spring_security_check" />" method='POST'>
-                    <input type="text" name="username" placeholder="Username" id="username">
-                    <input type="password" name="password" placeholder="Password" id='password'>
+                    <input type="text" name="username" placeholder="Username" id="username" value="admin">
+                    <input type="password" name="password" placeholder="Password" id='password' value="admin">
                     <input type="submit" name="login" class="login loginmodal-submit" value="<spring:message code="login.login" />">
 
                     <input type="hidden" name="${_csrf.parameterName}"
