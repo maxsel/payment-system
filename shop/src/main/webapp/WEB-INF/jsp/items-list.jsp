@@ -5,9 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div>
-    <c:forEach items="${categories}" var="category">
+    <c:forEach items="${items}" var="item">
         <div>
-            ${category.name}
+            ${item.id}
+            ${item.title}
+            ${item.description}
+            <a href="cart/add?id=${item.id}"> add to cart</a>
         </div>
     </c:forEach>
 </div>

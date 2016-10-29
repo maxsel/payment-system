@@ -2,6 +2,7 @@ package com.tofi.shop.controller;
 
 
 import com.tofi.shop.domain.*;
+import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,8 +21,8 @@ public class UserController {
     private static final Logger LOG = LogManager.getLogger(UserController.class);
 
     public UserController() {
+        
     }
-
 
     @ModelAttribute("user")
     public User populateUserDTO() throws ServiceException {
@@ -46,15 +48,6 @@ public class UserController {
     public String showOrdersPage()
             throws ServiceException {
         return "orders-list";
-    }
-
-    @ModelAttribute("cart_items")
-    public List<ItemInCart> populateCardItemsList() throws ServiceException {
-        ArrayList<ItemInCart> itemInCarts = new ArrayList<>();
-        itemInCarts.add(new ItemInCart(new Item(1L, "titile","dedesc", 50.23,
-                new ItemCategory(1L, "Available"),
-                new ItemStatus(1L, "NEW")), 1));
-        return new LinkedList<>(itemInCarts);
     }
 
     @RequestMapping("/cart")
