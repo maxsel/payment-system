@@ -12,7 +12,7 @@
             ${item.id}
             ${item.title}
             ${item.description}
-            <security:authorize url="/admin/**">
+            <security:authorize access="hasRole('ROLE_USER')">
                 <input type="button" onclick="addToCart(${item.id})" value="Add">
             </security:authorize>
         </div>
