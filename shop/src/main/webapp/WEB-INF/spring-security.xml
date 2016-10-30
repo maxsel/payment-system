@@ -10,8 +10,10 @@
             http://www.springframework.org/schema/context
             http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <http auto-config='true' use-expressions="true">
+    <http auto-config='true' use-expressions="true" authentication-manager-ref="authMgr">
+        <!--<intercept-url pattern="/register/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>-->
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
 
         <form-login
                 login-page="/login"
@@ -27,7 +29,7 @@
                 delete-cookies="JSESSIONID" />
     </http>
 
-    <authentication-manager>
+    <authentication-manager id="authMgr">
         <authentication-provider user-service-ref="jdbcUserService">
             <!--<password-encoder hash="md5" />-->
         </authentication-provider>

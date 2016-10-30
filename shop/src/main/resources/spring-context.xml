@@ -26,6 +26,8 @@
                 <value>mappings/Item.hbm.xml</value>
                 <value>mappings/ItemCategory.hbm.xml</value>
                 <value>mappings/ItemStatus.hbm.xml</value>
+                <value>mappings/User.hbm.xml</value>
+                <value>mappings/UserRole.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

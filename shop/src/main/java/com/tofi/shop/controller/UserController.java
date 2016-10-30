@@ -24,7 +24,7 @@ public class UserController {
 
     @ModelAttribute("user")
     public User populateUserDTO() throws ServiceException {
-        return new User(1, "test_user", "test_passwd");
+        return new User(1, "test_user", "test_passwd", "card_id", 0);
     }
 
     @RequestMapping("/profile")

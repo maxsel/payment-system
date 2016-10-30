@@ -23,11 +23,7 @@
             <li><a href="#">About Us</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <%--
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-            --%>
-            <security:authorize url="/admin/**">
+            <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
                 <div>
                     <form:form action="${rootUrl}logout" method="POST">
                         <div style="color: white;">

@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -35,17 +36,16 @@
                 <div class="tab-content">
                     <div id="sectionA" class="tab-pane fade in active">
                         <div class="innter-form">
-                            <form class="sa-innate-form" method="post">
+                            <form:form action="${rootUrl}signup" method="post" modelAttribute="newUser" class="sa-innate-form">
                                 <label>Login</label>
-                                <input type="text" name="login">
+                                <form:input path="login" type="text" name="login"/>
                                 <label>Password</label>
-                                <input type="password" name="password">
+                                <form:input path="password" type="password" name="password"/>
                                 <label>Card Id</label>
-                                <input type="text" name="card_id">
+                                <form:input path="cardId" type="text" name="card_id"/>
                                 <button type="submit">Join now</button>
                                 <p>By clicking Join now, you agree to our User Agreement, Privacy Policy, and Cookie Policy.</p>
-                            </form>
-
+                            </form:form>
                         </div>
                     </div>
                 </div>

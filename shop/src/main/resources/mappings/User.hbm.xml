@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tofi.shop.domain">
+    <class name="User" table="user">
+        <id name="id" type="int" unsaved-value="null">
+            <column name="USER_ID"/>
+            <generator class="identity" />
+        </id>
+        <property name="login" type="string">
+            <column name="USER_LOGIN" sql-type="varchar2" not-null="true"/>
+        </property>
+        <property name="password" type="string">
+            <column name="USER_PASSWORD" />
+        </property>
+        <property name="cardId" type="string">
+            <column name="CARD_ID" />
+        </property>
+        <property name="discount" type="int">
+            <column name="DISCOUNT" />
+        </property>
+        <set name="roles" cascade="all" table="user_has_role" inverse="false" lazy="false">
+            <key column="USER_ID"/>
+            <many-to-many column="ROLE_ID" class="com.tofi.shop.domain.UserRole"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
