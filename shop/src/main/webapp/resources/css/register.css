@@ -2,6 +2,12 @@
 body{
     background:#efefef;
 }
+
+.navbar-right {
+    padding-right: 10px;
+    margin-top: 8px;
+}
+
 .form-body{
     background:#fff;
     padding:20px;

@@ -3,7 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
 <div id="footer" class="footer">
-    <div class="container">
+    <div class="container text-center pagination-centered">
         <p class="muted credit"></p>
         <spring:message code="footer.text"/>
     </div>
