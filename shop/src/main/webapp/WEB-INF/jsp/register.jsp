@@ -16,8 +16,17 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/register.css" />" />
 </head>
 <body>
-<br>
-<br>
+
+<c:url var="rootUrl" value="/"/>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+            <a class="btn btn-danger" href="/tofi-shop/">Back</a>
+        </ul>
+    </div>
+</nav>
+
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -36,6 +45,7 @@
                                 <button type="submit">Join now</button>
                                 <p>By clicking Join now, you agree to our User Agreement, Privacy Policy, and Cookie Policy.</p>
                             </form>
+
                         </div>
                     </div>
                 </div>
