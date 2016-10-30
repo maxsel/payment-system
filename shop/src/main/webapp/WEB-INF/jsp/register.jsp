@@ -31,6 +31,8 @@
                                 <input type="text" name="login">
                                 <label>Password</label>
                                 <input type="password" name="password">
+                                <label>Card Id</label>
+                                <input type="text" name="card_id">
                                 <button type="submit">Join now</button>
                                 <p>By clicking Join now, you agree to our User Agreement, Privacy Policy, and Cookie Policy.</p>
                             </form>
