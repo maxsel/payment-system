@@ -30,7 +30,7 @@
                 </li>
             </security:authorize>
             <security:authorize access="hasRole('ROLE_USER')">
-                <li><a href="/user/cart">Cart</a></li>
+                <li><a href="${rootUrl}user/cart">Cart</a></li>
             </security:authorize>
         </ul>
         <ul class="nav navbar-nav navbar-right">
