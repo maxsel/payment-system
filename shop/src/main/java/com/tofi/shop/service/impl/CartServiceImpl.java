@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
     private List<ItemInCart> _itemsInCart = new ArrayList<>();
 
     @Override
     public void addItem(Item item) {
         ItemInCart itemInCart = getItemInCartByItem(item);
         if (itemInCart == null) {
-            addItemInCart(new ItemInCart(item, 1));
+            addItemInCart(new ItemInCart(1, item, 1));
         }
         else {
-            itemInCart.incAmount();
+            itemInCart.setAmount(itemInCart.getAmount() + 1);
         }
     }
 
@@ -66,7 +66,8 @@ public class CartServiceImpl implements CartService{
     }
 
     private ItemInCart getItemInCartByItem(Item item){
-        Optional<ItemInCart> itemInCart = _itemsInCart.stream().filter(iic -> iic.getItem().equals(item)).findFirst();
+        Optional<ItemInCart> itemInCart =
+                _itemsInCart.stream().filter(iic -> iic.getItem().equals(item)).findFirst();
         if (itemInCart.isPresent()) return itemInCart.get();
         return null;
     }

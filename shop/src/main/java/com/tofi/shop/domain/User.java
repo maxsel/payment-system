@@ -7,7 +7,6 @@ public class User {
     private String login;
     private String password;
     private String cardId;
-    // TODO: delete CVV from DB
     private int discount;
     private Set<UserRole> roles;
 
