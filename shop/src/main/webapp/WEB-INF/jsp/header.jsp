@@ -37,10 +37,6 @@
             <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
                 <div>
                     <form:form action="${rootUrl}logout" method="POST">
-                        <div style="color: white;">
-                            <spring:message code="header.hello"/>,
-                            <security:authentication property="principal.username"/>
-                        </div>
                         <div>
                             <input type="submit" class="btn btn-danger" value="<spring:message code="header.logout"/>"/>
                         </div>
