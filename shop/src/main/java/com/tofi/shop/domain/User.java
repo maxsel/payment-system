@@ -1,5 +1,6 @@
 package com.tofi.shop.domain;
 
+import java.util.List;
 import java.util.Set;
 
 public class User {
@@ -9,6 +10,7 @@ public class User {
     private String cardId;
     private int discount;
     private Set<UserRole> roles;
+    private List<ItemInCart> itemsInCart;
 
     public User() {
     }
@@ -67,6 +69,14 @@ public class User {
 
     public void setRoles(Set<UserRole> roles) {
         this.roles = roles;
+    }
+
+    public List<ItemInCart> getItemsInCart() {
+        return itemsInCart;
+    }
+
+    public void setItemsInCart(List<ItemInCart> itemsInCart) {
+        this.itemsInCart = itemsInCart;
     }
 
     @Override

@@ -5,6 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
+<c:url var="rootUrl" value="/"/>
+
 <h1>---Items---</h1>
 <div>
     <c:forEach items="${items}" var="item">
@@ -35,7 +37,7 @@
                 $.ajax({
                     type: "POST",
                     async: false,
-                    url: 'admin/cart/add?id=' + itemId,
+                    url: '${rootUrl}user/cart/add?id=' + itemId,
                     data: data,
                     headers: headers,
                     success: function (res) {

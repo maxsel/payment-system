@@ -53,4 +53,6 @@ public interface UserService {
      * @throws ServiceException if an error occurred when performing operation
      */
     User findById(Integer id) throws ServiceException;
+
+    User findByLogin(String login) throws ServiceException;
 }

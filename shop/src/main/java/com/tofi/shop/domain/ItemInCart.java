@@ -3,14 +3,16 @@ package com.tofi.shop.domain;
 public class ItemInCart {
     private int id;
     private Item item;
+    private User user;
     private int amount;
 
     public ItemInCart() {
     }
 
-    public ItemInCart(int id, Item item, int amount) {
+    public ItemInCart(int id, Item item, User user, int amount) {
         this.id = id;
         this.item = item;
+        this.user = user;
         this.amount = amount;
     }
 
@@ -30,6 +32,14 @@ public class ItemInCart {
         this.item = item;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public int getAmount() {
         return amount;
     }
@@ -47,7 +57,9 @@ public class ItemInCart {
 
         if (id != that.id) return false;
         if (amount != that.amount) return false;
-        return item != null ? item.equals(that.item) : that.item == null;
+        if (item != null ? !item.equals(that.item) : that.item != null)
+            return false;
+        return user != null ? user.equals(that.user) : that.user == null;
 
     }
 
@@ -55,6 +67,7 @@ public class ItemInCart {
     public int hashCode() {
         int result = id;
         result = 31 * result + (item != null ? item.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + amount;
         return result;
     }
@@ -64,6 +77,7 @@ public class ItemInCart {
         return "ItemInCart{" +
                 "id=" + id +
                 ", item=" + item +
+                ", user=" + user +
                 ", amount=" + amount +
                 '}';
     }

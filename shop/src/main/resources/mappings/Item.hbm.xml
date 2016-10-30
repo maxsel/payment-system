@@ -23,5 +23,9 @@
         <many-to-one name="status" class="ItemStatus" not-null="true" update="false" lazy="false">
             <column name="item_status_id" />
         </many-to-one>
+        <set name="itemsInCart" cascade="delete" table="item_in_cart" inverse="false" lazy="false">
+            <key column="ITEM_ID" />
+            <one-to-many class="com.tofi.shop.domain.ItemInCart"/>
+        </set>
     </class>
 </hibernate-mapping>

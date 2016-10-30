@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin/cart")
+@RequestMapping("user/cart")
 public class CartController {
     private final CartService cartService;
     private final ItemService itemService;
@@ -30,7 +30,7 @@ public class CartController {
     }
 
     @RequestMapping("")
-    public String showCart(){
+    public String showCart() {
         return "cart";
     }
 

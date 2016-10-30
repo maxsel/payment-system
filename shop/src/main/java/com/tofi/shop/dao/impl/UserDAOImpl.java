@@ -6,6 +6,7 @@ import com.tofi.shop.domain.User;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -60,5 +61,18 @@ public class UserDAOImpl implements UserDAO {
     public User findById(Integer id) throws DAOException {
         Session session = sessionFactory.getCurrentSession();
         return (User) session.get(User.class, id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public User findByLogin(String login) throws DAOException {
+        Session session = sessionFactory.getCurrentSession();
+        Criteria criteria = session.createCriteria(User.class)
+                .add(Restrictions.eq("login", login));
+        List<User> list = criteria.list();
+        if (!list.isEmpty()) {
+            return list.get(0);
+        }
+        return null;
     }
 }

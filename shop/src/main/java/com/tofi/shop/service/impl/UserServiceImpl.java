@@ -95,4 +95,17 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(e);
         }
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public User findByLogin(String login) throws ServiceException {
+        try {
+            return userDAO.findByLogin(login);
+        } catch (DAOException e) {
+            logger.error(e);
+            throw new ServiceException(e);
+        }
+    }
 }

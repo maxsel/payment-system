@@ -2,22 +2,37 @@ package com.tofi.shop.service.impl;
 
 import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemInCart;
+import com.tofi.shop.domain.User;
 import com.tofi.shop.service.CartService;
+import com.tofi.shop.service.ServiceException;
+import com.tofi.shop.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
+    private UserService userService;
     private List<ItemInCart> _itemsInCart = new ArrayList<>();
 
+    @Inject
+    public CartServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
-    public void addItem(Item item) {
+    public void addItem(Item item) throws ServiceException {
         ItemInCart itemInCart = getItemInCartByItem(item);
         if (itemInCart == null) {
-            addItemInCart(new ItemInCart(1, item, 1));
+            org.springframework.security.core.userdetails.User principal =
+                    (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String name = principal.getUsername(); //get logged in username
+            User user = userService.findById(1);
+            addItemInCart(new ItemInCart(1, item, user, 1));
         }
         else {
             itemInCart.setAmount(itemInCart.getAmount() + 1);
