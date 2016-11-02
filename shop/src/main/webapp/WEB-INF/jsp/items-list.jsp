@@ -15,7 +15,7 @@
                     ${item.title}<br>
                     ${item.description}<br>
                     <security:authorize access="hasRole('ROLE_USER')">
-                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${item.id})">add</button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${item.id})">+</button>
                     </security:authorize>
                 </div>
             </div>
