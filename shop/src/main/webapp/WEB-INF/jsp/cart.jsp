@@ -7,7 +7,12 @@
 <div>
     <h1>CART:</h1>
     <c:forEach items="${cart_items}" var="cart_item">
-        <h2>Item: ${cart_item.item.title}</h2>
-        <h2>Amount: ${cart_item.amount}</h2>
+        <div class = "panel panel-default">
+            <div class = "panel-body">
+                This is a Basic panel
+                <h2>Item: ${cart_item.item.title}</h2>
+                <h2>Amount: ${cart_item.amount}</h2>
+            </div>
+        </div>
     </c:forEach>
 </div>

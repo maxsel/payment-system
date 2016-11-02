@@ -9,12 +9,16 @@
 <div>
     <c:forEach items="${items}" var="item">
         <div>
-            ${item.id}
-            ${item.title}
-            ${item.description}
-            <security:authorize access="hasRole('ROLE_USER')">
-                <input type="button" onclick="addToCart(${item.id})" value="Add">
-            </security:authorize>
+            <div class = "panel panel-default">
+                <div class = "panel-body">
+                    ${item.id}<br>
+                    ${item.title}<br>
+                    ${item.description}<br>
+                    <security:authorize access="hasRole('ROLE_USER')">
+                        <input type="button" onclick="addToCart(${item.id})" value="Add">
+                    </security:authorize>
+                </div>
+            </div>
         </div>
     </c:forEach>
 
@@ -35,7 +39,7 @@
                 $.ajax({
                     type: "POST",
                     async: false,
-                    url: 'admin/cart/add?id=' + itemId,
+                    url: 'user/cart/add?id=' + itemId,
                     data: data,
                     headers: headers,
                     success: function (res) {
