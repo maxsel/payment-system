@@ -7,7 +7,6 @@
 
 <c:url var="rootUrl" value="/"/>
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -17,13 +16,13 @@
                     <div id="sectionA" class="tab-pane fade in active">
                         <div class="innter-form">
                             <form:form action="${rootUrl}add" method="post" modelAttribute="newItem" class="sa-innate-form">
-                                <label>Login</label>
+                                <label>Title</label>
                                 <form:input path="title" type="text" name="title"/>
-                                <label>Password</label>
-                                <form:input path="description" type="password" name="description"/>
-                                <label>price</label>
+                                <label>Description</label>
+                                <form:input path="description" type="text" name="description"/>
+                                <label>Price</label>
                                 <form:input path="price" type="text" name="price"/>
-                                <button type="submit">Join now</button>
+                                <button type="submit">Create</button>
                             </form:form>
                         </div>
                     </div>
