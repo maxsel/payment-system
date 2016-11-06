@@ -42,6 +42,7 @@
                     headers: headers,
                     success: function (res) {
                         console.log(res);
+                        $('#' + itemId).text(res);
                     }
                 });
             };
