@@ -5,6 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
+<c:url var="rootUrl" value="/"/>
+
 ADMIN items manage page
 <div class="container">
 <div class="row">
@@ -14,7 +16,7 @@ ADMIN items manage page
 <div class="tab-content">
 <div id="sectionA" class="tab-pane fade in active">
 <div class="innter-form">
-<%--
+
 <form:form action="${rootUrl}add" method="post" modelAttribute="newItem" class="sa-innate-form">
     <label>title</label>
     <form:input path="title" type="text" name="title"/>
@@ -23,7 +25,7 @@ ADMIN items manage page
     <button type="submit">Create</button>
     <p>By clicking Join now, you agree to our User Agreement, Privacy Policy, and Cookie Policy.</p>
 </form:form>
---%>
+
 </div>
 </div>
 </div>

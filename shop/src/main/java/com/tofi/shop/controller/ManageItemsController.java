@@ -5,6 +5,7 @@ import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,7 +28,8 @@ public class ManageItemsController {
     }
 
     @RequestMapping("/add")
-    public String addItem(@ModelAttribute("newItem") Item item) throws ServiceException {
+    public String addItem(@ModelAttribute("newItem") Item item,
+                          BindingResult bindingResult) throws ServiceException {
         itemService.create(item);
         return "admin-manage";
     }
