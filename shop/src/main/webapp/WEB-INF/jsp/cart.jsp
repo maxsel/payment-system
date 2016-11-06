@@ -14,6 +14,7 @@
                     <li>${cart_item.amount}</li>
                     <li class="pull-right">
                         <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="removeFromCart(${cart_item.id})">-</button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${cart_item.id})">+</button>
                     </li>
                 </ul>
             </div>
@@ -44,6 +45,29 @@
                     }
                 });
             };
+
+        window.addToCart = function (itemId) {
+            var csrfParameter = '${_csrf.parameterName}';
+            var csrfToken = '${_csrf.token}';
+            var csrfHeader = '${_csrf.headerName}';
+
+            var data = {};
+            var headers = {};
+
+            data[csrfParameter] = csrfToken;
+            headers[csrfHeader] = csrfToken;
+
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: 'items-list/add?id=' + itemId,
+                data: data,
+                headers: headers,
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        };
         });
     </script>
 </div>
