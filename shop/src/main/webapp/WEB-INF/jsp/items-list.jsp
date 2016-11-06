@@ -39,7 +39,7 @@
                 $.ajax({
                     type: "POST",
                     async: false,
-                    url: 'user/cart/add?id=' + itemId,
+                    url: 'items-list/add?id=' + itemId,
                     data: data,
                     headers: headers,
                     success: function (res) {

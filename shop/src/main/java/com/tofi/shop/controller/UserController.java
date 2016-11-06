@@ -49,11 +49,6 @@ public class UserController {
         return new LinkedList<>();
     }
 
-    @RequestMapping("/cart")
-    public String showCartPage() throws ServiceException {
-        return "cart";
-    }
-
     @RequestMapping("/purchase")
     public String showPurchasePage(@ModelAttribute("itemsInCart") ArrayList<ItemInCart> itemInCarts)
             throws ServiceException {

@@ -14,7 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${rootUrl}items-list/">Tofi-shop</a>
+            <a class="navbar-brand" href="${rootUrl}">Tofi-shop</a>
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
