@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
-<c:url var="rootUrl" value="/"/>
+<c:url var="rootUrl" value="/admin/manage-items/"/>
 
 ADMIN items manage page
 <div class="container">
