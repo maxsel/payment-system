@@ -50,7 +50,7 @@
                 </div>
             </security:authorize>
             <security:authorize access="isAnonymous()">
-                <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#login-modal"><spring:message code="header.login"/></a>
+                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#login-modal"><spring:message code="header.login"/></a>
 
                 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
