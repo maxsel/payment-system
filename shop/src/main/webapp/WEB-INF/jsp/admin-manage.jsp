@@ -22,7 +22,7 @@
                                 <label>Password</label>
                                 <form:input path="description" type="password" name="description"/>
                                 <label>price</label>
-                                <form:input path="price" type="password" name="price"/>
+                                <form:input path="price" type="text" name="price"/>
                                 <button type="submit">Join now</button>
                             </form:form>
                         </div>
