@@ -22,6 +22,7 @@
                                 <form:input path="description" type="text" name="description"/>
                                 <label>Price</label>
                                 <form:input path="price" type="text" name="price"/>
+                                <form:select path="country" items="${categoriesList}" />
                                 <button type="submit">Create</button>
                             </form:form>
                         </div>
