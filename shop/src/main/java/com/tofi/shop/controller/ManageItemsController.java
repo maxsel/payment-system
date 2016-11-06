@@ -27,6 +27,11 @@ public class ManageItemsController {
         return "admin-manage";
     }
 
+    @ModelAttribute("newItem")
+    public Item populateNewItemDTO(){
+        return new Item();
+    }
+
     @RequestMapping("/add")
     public String addItem(@ModelAttribute("newItem") Item item,
                           BindingResult bindingResult) throws ServiceException {
