@@ -7,29 +7,28 @@
 
 <c:url var="rootUrl" value="/admin/manage-items/"/>
 
-ADMIN items manage page
+
 <div class="container">
-<div class="row">
-<div class="col-md-4 col-md-offset-4">
-<div class="form-body">
-<h1><span class="label label-danger">Create Item</span></h1>
-<div class="tab-content">
-<div id="sectionA" class="tab-pane fade in active">
-<div class="innter-form">
-
-<form:form action="${rootUrl}add" method="post" modelAttribute="newItem" class="sa-innate-form">
-    <label>title</label>
-    <form:input path="title" type="text" name="title"/>
-    <label>description</label>
-    <form:input path="description" type="password" name="description"/>
-    <button type="submit">Create</button>
-    <p>By clicking Join now, you agree to our User Agreement, Privacy Policy, and Cookie Policy.</p>
-</form:form>
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="form-body">
+                <h1><span class="label label-danger">Sign In</span></h1>
+                <div class="tab-content">
+                    <div id="sectionA" class="tab-pane fade in active">
+                        <div class="innter-form">
+                            <form:form action="${rootUrl}add" method="post" modelAttribute="newItem" class="sa-innate-form">
+                                <label>Login</label>
+                                <form:input path="title" type="text" name="title"/>
+                                <label>Password</label>
+                                <form:input path="description" type="password" name="description"/>
+                                <label>price</label>
+                                <form:input path="price" type="text" name="price"/>
+                                <button type="submit">Join now</button>
+                            </form:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
