@@ -8,6 +8,11 @@
         <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
     </definition>
 
+    <definition name="manage-items" extends="template">
+        <put-attribute name="title" value="manage items"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/admin-manage.jsp"/>
+    </definition>
+
     <definition name="items-list" extends="template">
         <put-attribute name="title" value="Items List"/>
         <put-attribute name="body" value="/WEB-INF/jsp/items-list.jsp"/>
