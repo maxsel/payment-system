@@ -22,7 +22,9 @@
                                 <form:input path="description" type="text" name="description"/>
                                 <label>Price</label>
                                 <form:input path="price" type="text" name="price"/>
-                                <form:select path="category" items="${categories}" />
+                                <form:select path="category">
+                                    <form:options itemLabel="name" items="${categories}" itemValue="id"/>
+                                </form:select>
                                 <button type="submit">Create</button>
                             </form:form>
                         </div>
