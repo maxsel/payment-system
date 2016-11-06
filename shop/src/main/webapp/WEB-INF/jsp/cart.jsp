@@ -7,12 +7,43 @@
 <div>
     <h1>CART:</h1>
     <c:forEach items="${cart_items}" var="cart_item">
-        <div class = "panel panel-default">
+        <div class = "panel panel-success">
+            <div class="panel-heading">${cart_item.item.title}</div>
             <div class = "panel-body">
-                This is a Basic panel
-                <h2>Item: ${cart_item.item.title}</h2>
-                <h2>Amount: ${cart_item.amount}</h2>
+                <ul class="list-inline">
+                    <li>${cart_item.amount}</li>
+                    <li class="pull-right">
+                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="removeFromCart(${cart_item.id})">-</button>
+                    </li>
+                </ul>
             </div>
         </div>
     </c:forEach>
+
+    <script>
+        $(document).ready(()=> {
+            window.removeFromCart = function (itemId) {
+                var csrfParameter = '${_csrf.parameterName}';
+                var csrfToken = '${_csrf.token}';
+                var csrfHeader = '${_csrf.headerName}';
+
+                var data = {};
+                var headers = {};
+
+                data[csrfParameter] = csrfToken;
+                headers[csrfHeader] = csrfToken;
+
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: 'items-list/remove?id=' + itemId,
+                    data: data,
+                    headers: headers,
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+            };
+        });
+    </script>
 </div>
