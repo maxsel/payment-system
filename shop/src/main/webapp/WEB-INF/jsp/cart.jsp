@@ -11,7 +11,7 @@
             <div class="panel-heading">${cart_item.item.title}</div>
             <div class = "panel-body">
                 <ul class="list-inline">
-                    <li>${cart_item.amount}</li>
+                    <li id="amount">${cart_item.amount}</li>
                     <li class="pull-right">
                         <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="removeFromCart(${cart_item.id})">-</button>
                         <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${cart_item.id})">+</button>
@@ -65,6 +65,7 @@
                 headers: headers,
                 success: function (res) {
                     console.log(res);
+                    $('#' + itemId).text(res);
                 }
             });
         };
