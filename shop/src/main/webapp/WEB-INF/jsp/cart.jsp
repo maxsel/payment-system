@@ -37,7 +37,7 @@
                 $.ajax({
                     type: "POST",
                     async: false,
-                    url: 'items-list/remove?id=' + itemId,
+                    url: 'cart/remove?id=' + itemId,
                     data: data,
                     headers: headers,
                     success: function (res) {
@@ -60,7 +60,7 @@
             $.ajax({
                 type: "POST",
                 async: false,
-                url: 'items-list/add?id=' + itemId,
+                url: 'cart/add?id=' + itemId,
                 data: data,
                 headers: headers,
                 success: function (res) {

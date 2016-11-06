@@ -30,6 +30,23 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void incAmountOfItem(Item item) {
+        ItemInCart itemInCart = this.getItemInCartByItem(item);
+        itemInCart.setAmount(itemInCart.getAmount()+1);
+    }
+
+    @Override
+    public void decAmountOfItem(Item item) {
+        ItemInCart itemInCart = this.getItemInCartByItem(item);
+        Integer amount = itemInCart.getAmount();
+        if (amount == 1) {
+            this.removeItemInCart(itemInCart);
+            return;
+        }
+        itemInCart.setAmount(amount - 1);
+    }
+
+    @Override
     public void changeItemAmount(Item item, int number) {
         getItemInCartByItem(item).setAmount(number);
     }
