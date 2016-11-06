@@ -1,5 +1,9 @@
 @import url(/tofi-shop/resources/css/RobotoFont.css);
 
+.menu-item-login {
+    margin-left: 15px;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;

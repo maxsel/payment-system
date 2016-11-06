@@ -41,7 +41,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
-                <div>
+                <div class="menu-item-login">
                     <form:form action="${rootUrl}logout" method="POST">
                         <div>
                             <input type="submit" class="btn btn-danger" value="<spring:message code="header.logout"/>"/>
@@ -50,7 +50,7 @@
                 </div>
             </security:authorize>
             <security:authorize access="isAnonymous()">
-                <a class="btn btn-success" href="#" data-toggle="modal" data-target="#login-modal"><spring:message code="header.login"/></a>
+                <a class="btn btn-success menu-item-login" href="#" data-toggle="modal" data-target="#login-modal"><spring:message code="header.login"/></a>
 
                 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
