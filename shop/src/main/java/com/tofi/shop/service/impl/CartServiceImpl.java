@@ -52,6 +52,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public int getAmountOfItem(Item item) {
+        return this.getItemInCartByItem(item).getAmount();
+    }
+
+    @Override
     public int getTotalPrice() {
         int totalPrice = 0;
         for (ItemInCart itemInCart : _itemsInCart) {
