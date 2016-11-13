@@ -19,13 +19,13 @@ public class CartController {
     private final ItemService itemService;
 
     @Inject
-    public CartController(CartService cartService, ItemService itemService){
+    public CartController(CartService cartService, ItemService itemService) {
         this.cartService = cartService;
         this.itemService = itemService;
     }
 
     @ModelAttribute("cart_items")
-    public List<ItemInCart> itemsInCart(){
+    public List<ItemInCart> itemsInCart() {
         return this.cartService.getItemsInCart();
     }
 
@@ -34,12 +34,21 @@ public class CartController {
         return "cart";
     }
 
-    @PostMapping("/add")
-    public @ResponseBody String addItemToCart(@RequestParam(value = "id", defaultValue = "-1") String itemId ) throws ServiceException {
-        Integer id = Integer.parseInt(itemId);
-        if (id == -1) return "FAIL";
+    @PostMapping("/remove")
+    @ResponseBody String delete(@RequestParam(value = "id", defaultValue = "-1") String itemId) throws ServiceException {
+        if (itemId.equals("-1")) return "FAIL";
+        int id = Integer.parseInt(itemId);
         Item item = this.itemService.findById(id);
-        this.cartService.addItem(item);
-        return "OK";
+        this.cartService.decAmountOfItem(item);
+        return Integer.toString(this.cartService.getAmountOfItem(item));
+    }
+
+    @PostMapping("/add")
+    @ResponseBody String add(@RequestParam(value = "id", defaultValue = "-1") String itemId) throws ServiceException {
+        if (itemId == "-1") return "FAIL";
+        int id = Integer.parseInt(itemId);
+        Item item = this.itemService.findById(id);
+        this.cartService.incAmountOfItem(item);
+        return Integer.toString(this.cartService.getAmountOfItem(item));
     }
 }

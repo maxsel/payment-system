@@ -7,16 +7,24 @@
 
 <c:url var="rootUrl" value="/"/>
 
-<h1>---Items---</h1>
+<h1>Items list</h1>
 <div>
     <c:forEach items="${items}" var="item">
         <div>
-            ${item.id}
-            ${item.title}
-            ${item.description}
-            <security:authorize access="hasRole('ROLE_USER')">
-                <input type="button" onclick="addToCart(${item.id})" value="Add">
-            </security:authorize>
+            <div class = "panel panel-success">
+                <div class="panel-heading"><h3>${item.title}</h3></div>
+                <div class = "panel-body">
+                    <ul class="list-inline">
+                        <li>${item.id}</li>
+                        <li>${item.description}</li>
+                        <security:authorize access="hasRole('ROLE_USER')">
+                            <li class="pull-right">
+                                <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${item.id})">+</button>
+                            </li>
+                        </security:authorize>
+                    </ul>
+                </div>
+            </div>
         </div>
     </c:forEach>
 
@@ -37,7 +45,8 @@
                 $.ajax({
                     type: "POST",
                     async: false,
-                    url: '${rootUrl}user/cart/add?id=' + itemId,
+                    <%--url: '${rootUrl}user/cart/add?id=' + itemId,--%>
+                    url: 'items-list/add?id=' + itemId,
                     data: data,
                     headers: headers,
                     success: function (res) {

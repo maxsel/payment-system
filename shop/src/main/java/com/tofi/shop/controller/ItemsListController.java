@@ -2,6 +2,7 @@ package com.tofi.shop.controller;
 
 import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemCategory;
+import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.CategoryService;
 import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
@@ -11,8 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.LinkedList;
@@ -25,11 +25,14 @@ public class ItemsListController {
 
     private final ItemService itemService;
     private final CategoryService categoryService;
+    private final CartService cartService;
 
     @Inject
-    public ItemsListController(ItemService itemService, CategoryService categoryService) {
+    public ItemsListController(ItemService itemService, CategoryService categoryService, CartService cartService) {
         Assert.notNull(itemService, "ItemService must be not null!");
         Assert.notNull(categoryService, "CategoryService must be not null!");
+        Assert.notNull(cartService, "CartServicec must be not null");
+        this.cartService = cartService;
         this.itemService = itemService;
         this.categoryService = categoryService;
     }
@@ -54,5 +57,14 @@ public class ItemsListController {
             throws ServiceException {
         items = itemService.findAll();
         return "items-list";
+    }
+
+    @PostMapping("/add")
+    public @ResponseBody String addItemToCart(@RequestParam(value = "id", defaultValue = "-1") String itemId) throws ServiceException {
+        Integer id = Integer.parseInt(itemId);
+        if (id == -1) return "FAIL";
+        Item item = this.itemService.findById(id);
+        this.cartService.addItem(item);
+        return Integer.toString(this.cartService.getNumberOfItems());
     }
 }
