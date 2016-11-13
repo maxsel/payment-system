@@ -7,6 +7,7 @@
 
 <c:url var="rootUrl" value="/"/>
 
+<img src="resources/info?itemId=1"/>
 <h1>Items list</h1>
 <div>
     <c:forEach items="${items}" var="item">
