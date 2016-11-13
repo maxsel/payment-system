@@ -29,3 +29,13 @@ insert into item(item_id, item_title, item_desc, item_price, item_cat_id, item_s
   values(2, 'item2', 'desc2', 12.6, 1, 1);
 insert into item(item_id, item_title, item_desc, item_price, item_cat_id, item_status_id)
   values(3, 'item3', 'desc3', 50.3, 1, 2);
+
+
+insert into order_status(status_id, status_name)
+	values(1, "NEW");
+insert into order_status(status_id, status_name)
+	values(2, "READY");
+insert into order_status(status_id, status_name)
+	values(3, "REJECTED");
+insert into order_status(status_id, status_name)
+	values(4, "ARCHIVED");
