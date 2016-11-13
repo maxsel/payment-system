@@ -6,6 +6,7 @@
 
 <div>
     <h1>CART:</h1>
+    <a class="btn btn-primary" href="purchase">Make order</a>
     <c:forEach items="${cart_items}" var="cart_item">
         <div class = "panel panel-success">
             <div class="panel-heading">${cart_item.item.title}</div>
