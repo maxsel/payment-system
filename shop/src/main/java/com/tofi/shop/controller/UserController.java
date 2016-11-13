@@ -40,11 +40,8 @@ public class UserController {
     public String showProfilePage(Model model)
             throws ServiceException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication);
         String login = authentication.getName();
-        System.out.println(login);
         User user = userService.findByLogin(login);
-        System.out.println(user);
         model.addAttribute("current_user", user);
         return "profile";
     }

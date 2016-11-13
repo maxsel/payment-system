@@ -7,6 +7,8 @@ import com.tofi.shop.service.ServiceException;
 import com.tofi.shop.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -107,5 +109,13 @@ public class UserServiceImpl implements UserService {
             logger.error(e);
             throw new ServiceException(e);
         }
+    }
+
+    @Override
+    public User getAuthenticatedUser() throws ServiceException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String login = authentication.getName();
+        User user = findByLogin(login);
+        return user;
     }
 }

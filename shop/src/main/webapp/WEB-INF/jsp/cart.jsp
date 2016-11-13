@@ -11,10 +11,10 @@
             <div class="panel-heading">${cart_item.item.title}</div>
             <div class = "panel-body">
                 <ul class="list-inline">
-                    <li id="${cart_item.id}">${cart_item.amount}</li>
+                    <li id="${cart_item.item.id}">${cart_item.amount}</li>
                     <li class="pull-right">
-                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="removeFromCart(${cart_item.id})">-</button>
-                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${cart_item.id})">+</button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="removeFromCart(${cart_item.item.id})">-</button>
+                        <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${cart_item.item.id})">+</button>
                     </li>
                 </ul>
             </div>

@@ -4,108 +4,110 @@ import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemInCart;
 import com.tofi.shop.domain.User;
 import com.tofi.shop.service.CartService;
+import com.tofi.shop.service.ItemInCartService;
 import com.tofi.shop.service.ServiceException;
 import com.tofi.shop.service.UserService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
-    private UserService userService;
-    private List<ItemInCart> _itemsInCart = new ArrayList<>();
+    private static final int DUMMY_ID = 0;
+    private static final int INITIAL_AMOUNT = 1;
+    private ItemInCartService itemInCartService;
 
     @Inject
-    public CartServiceImpl(UserService userService) {
-        this.userService = userService;
+    public CartServiceImpl(ItemInCartService itemInCartService) {
+        this.itemInCartService = itemInCartService;
     }
 
     @Override
-    public void addItem(Item item) throws ServiceException {
-        ItemInCart itemInCart = getItemInCartByItem(item);
+    public void addItem(Item item, User user) throws ServiceException {
+        ItemInCart itemInCart = getItemInCartByItemAndUser(item, user);
         if (itemInCart == null) {
-            org.springframework.security.core.userdetails.User principal =
-                    (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            String name = principal.getUsername(); //get logged in username
-            User user = userService.findById(1);
-            addItemInCart(new ItemInCart(1, item, user, 1));
+            addItemInCart(new ItemInCart(DUMMY_ID, item, user, INITIAL_AMOUNT));
         }
         else {
             itemInCart.setAmount(itemInCart.getAmount() + 1);
+            itemInCartService.update(itemInCart);
         }
     }
 
     @Override
-    public void removeItem(Item item) {
-        removeItemInCart(getItemInCartByItem(item));
+    public void removeItem(Item item, User user) throws ServiceException {
+        removeItemInCart(getItemInCartByItemAndUser(item, user));
     }
 
     @Override
-    public void incAmountOfItem(Item item) {
-        ItemInCart itemInCart = this.getItemInCartByItem(item);
-        itemInCart.setAmount(itemInCart.getAmount()+1);
+    public void incAmountOfItem(Item item, User user) throws ServiceException {
+        ItemInCart itemInCart = getItemInCartByItemAndUser(item, user);
+        assert itemInCart != null;
+        itemInCart.setAmount(itemInCart.getAmount() + 1);
+        itemInCartService.update(itemInCart);
     }
 
     @Override
-    public void decAmountOfItem(Item item) {
-        ItemInCart itemInCart = this.getItemInCartByItem(item);
+    public void decAmountOfItem(Item item, User user) throws ServiceException {
+        ItemInCart itemInCart = getItemInCartByItemAndUser(item, user);
+        assert itemInCart != null;
         Integer amount = itemInCart.getAmount();
         if (amount == 1) {
-            this.removeItemInCart(itemInCart);
+            removeItemInCart(itemInCart);
             return;
         }
         itemInCart.setAmount(amount - 1);
     }
 
     @Override
-    public void changeItemAmount(Item item, int number) {
-        getItemInCartByItem(item).setAmount(number);
+    public void changeItemAmount(Item item, User user, int number) throws ServiceException {
+        getItemInCartByItemAndUser(item, user).setAmount(number);
     }
 
     @Override
-    public int getAmountOfItem(Item item) {
-        return this.getItemInCartByItem(item).getAmount();
+    public int getAmountOfItem(Item item, User user) throws ServiceException {
+        return getItemInCartByItemAndUser(item, user).getAmount();
     }
 
     @Override
-    public int getTotalPrice() {
+    public int getTotalPrice() throws ServiceException {
         int totalPrice = 0;
-        for (ItemInCart itemInCart : _itemsInCart) {
+        for (ItemInCart itemInCart : itemInCartService.findAll()) {
             totalPrice += itemInCart.getAmount() * itemInCart.getItem().getPrice();
         }
         return totalPrice;
     }
 
     @Override
-    public int getNumberOfItems() {
-        return _itemsInCart.size();
+    public int getNumberOfItems() throws ServiceException {
+        return itemInCartService.findAll().size();
     }
 
     @Override
-    public void clear() {
-        _itemsInCart.clear();
+    public void clear() throws ServiceException {
+        for (ItemInCart itemInCart : itemInCartService.findAll()) {
+            itemInCartService.delete(itemInCart.getId());
+        }
     }
 
-    public List<ItemInCart> getItemsInCart(){
-        return this._itemsInCart;
+    public List<ItemInCart> getItemsInCart() throws ServiceException {
+        return itemInCartService.findAll();
     }
 
-    private void removeItemInCart(ItemInCart itemInCart){
-        _itemsInCart.remove(itemInCart);
+    private void removeItemInCart(ItemInCart itemInCart) throws ServiceException {
+        itemInCartService.delete(itemInCart.getId());
     }
 
-    private void addItemInCart(ItemInCart itemInCart){
-        _itemsInCart.add(itemInCart);
+    private void addItemInCart(ItemInCart itemInCart) throws ServiceException {
+        itemInCartService.create(itemInCart);
     }
 
-    private ItemInCart getItemInCartByItem(Item item){
-        Optional<ItemInCart> itemInCart =
-                _itemsInCart.stream().filter(iic -> iic.getItem().equals(item)).findFirst();
-        if (itemInCart.isPresent()) return itemInCart.get();
-        return null;
+    private ItemInCart getItemInCartByItemAndUser(Item item, User user) throws ServiceException {
+        return itemInCartService.findAll()
+                .stream()
+                .filter(itemInCart ->
+                        itemInCart.getItem().getId().equals(item.getId()) &&
+                                itemInCart.getUser().getId() == user.getId()).findFirst().orElse(null);
     }
 }

@@ -55,4 +55,6 @@ public interface UserService {
     User findById(Integer id) throws ServiceException;
 
     User findByLogin(String login) throws ServiceException;
+
+    User getAuthenticatedUser() throws ServiceException;
 }
