@@ -44,8 +44,7 @@ public class CartServiceImpl implements CartService {
     public void incAmountOfItem(Item item, User user) throws ServiceException {
         ItemInCart itemInCart = getItemInCartByItemAndUser(item, user);
         assert itemInCart != null;
-        itemInCart.setAmount(itemInCart.getAmount() + 1);
-        itemInCartService.update(itemInCart);
+        changeAmountOfItem(itemInCart, itemInCart.getAmount()+1);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class CartServiceImpl implements CartService {
             removeItemInCart(itemInCart);
             return;
         }
-        itemInCart.setAmount(amount - 1);
+        changeAmountOfItem(itemInCart, amount-1);
     }
 
     @Override
@@ -113,5 +112,10 @@ public class CartServiceImpl implements CartService {
                 .filter(itemInCart ->
                         itemInCart.getItem().getId().equals(item.getId()) &&
                                 itemInCart.getUser().getId() == user.getId()).findFirst().orElse(null);
+    }
+
+    private void changeAmountOfItem(ItemInCart itemInCart, int amount) throws ServiceException {
+        itemInCart.setAmount(amount);
+        itemInCartService.update(itemInCart);
     }
 }
