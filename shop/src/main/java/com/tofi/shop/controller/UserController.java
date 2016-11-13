@@ -3,12 +3,18 @@ package com.tofi.shop.controller;
 
 import com.tofi.shop.domain.*;
 import com.tofi.shop.service.ServiceException;
+import com.tofi.shop.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,9 +23,12 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     private static final Logger LOG = LogManager.getLogger(UserController.class);
+    private UserService userService;
 
-    public UserController() {
 
+    @Inject
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @ModelAttribute("user")
@@ -28,7 +37,15 @@ public class UserController {
     }
 
     @RequestMapping("/profile")
-    public String showProfilePage() throws ServiceException {
+    public String showProfilePage(Model model)
+            throws ServiceException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication);
+        String login = authentication.getName();
+        System.out.println(login);
+        User user = userService.findByLogin(login);
+        System.out.println(user);
+        model.addAttribute("current_user", user);
         return "profile";
     }
 

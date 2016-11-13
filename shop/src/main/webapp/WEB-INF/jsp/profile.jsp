@@ -6,7 +6,7 @@
 
 <div>
     <h1>PROFILE</h1>
-    <h2>ID: ${user.id}</h2>
-    <h2>LOGIN: ${user.login}</h2>
-    <h2>PASSSWD: ${user.password}</h2>
+    <h2>ID: ${current_user.id}</h2>
+    <h2>LOGIN: ${current_user.login}</h2>
+    <h2>PASSSWD: ${current_user.password}</h2>
 </div>
