@@ -17,6 +17,9 @@
         <property name="price" type="int">
             <column name="ITEM_PRICE" />
         </property>
+        <property name="image" type="binary">
+            <column name="ITEM_IMG" not-null="false" sql-type="blob"/>
+        </property>
         <many-to-one name="category" class="ItemCategory" not-null="true" update="false" lazy="false">
             <column name="item_cat_id" />
         </many-to-one>

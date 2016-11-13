@@ -29,7 +29,7 @@ public class CartController {
 
     @ModelAttribute("cart_items")
     public List<ItemInCart> itemsInCart() throws ServiceException {
-        return cartService.getItemsInCart();
+        return cartService.getItemsInCart(userService.getAuthenticatedUser());
     }
 
     @RequestMapping("")

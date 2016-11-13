@@ -21,6 +21,6 @@ public interface CartService {
 
     int getTotalPrice() throws ServiceException;
     int getNumberOfItems() throws ServiceException;
-    List<ItemInCart> getItemsInCart() throws ServiceException;
+    List<ItemInCart> getItemsInCart(User user) throws ServiceException;
     void clear() throws ServiceException;
 }

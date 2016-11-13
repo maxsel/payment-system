@@ -6,11 +6,11 @@ import com.tofi.shop.domain.User;
 import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.ItemInCartService;
 import com.tofi.shop.service.ServiceException;
-import com.tofi.shop.service.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -91,8 +91,12 @@ public class CartServiceImpl implements CartService {
         }
     }
 
-    public List<ItemInCart> getItemsInCart() throws ServiceException {
-        return itemInCartService.findAll();
+    public List<ItemInCart> getItemsInCart(User user) throws ServiceException {
+        System.out.println(user.getId());
+        return itemInCartService.findAll()
+                .stream()
+                .filter(itemInCart ->
+                        itemInCart.getUser().getId() == user.getId()).collect(Collectors.toList());
     }
 
     private void removeItemInCart(ItemInCart itemInCart) throws ServiceException {

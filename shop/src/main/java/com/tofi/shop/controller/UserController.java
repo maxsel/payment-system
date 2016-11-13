@@ -2,13 +2,13 @@ package com.tofi.shop.controller;
 
 
 import com.tofi.shop.domain.*;
+import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.ServiceException;
 import com.tofi.shop.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,11 +24,13 @@ import java.util.List;
 public class UserController {
     private static final Logger LOG = LogManager.getLogger(UserController.class);
     private UserService userService;
+    private CartService cartService;
 
 
     @Inject
-    public UserController(UserService userService) {
+    public UserController(UserService userService, CartService cartService) {
         this.userService = userService;
+        this.cartService = cartService;
     }
 
     @ModelAttribute("user")
@@ -58,14 +60,15 @@ public class UserController {
         return "orders-list";
     }
     
-    @ModelAttribute("cart_items")
-    public List<ItemInCart> populateCardItemsList() throws ServiceException {
-        return new LinkedList<>();
-    }
+//    @ModelAttribute("cart_items")
+//    public List<ItemInCart> populateCardItemsList() throws ServiceException {
+//        return new LinkedList<>();
+//    }
 
     @RequestMapping("/purchase")
-    public String showPurchasePage(@ModelAttribute("itemsInCart") ArrayList<ItemInCart> itemInCarts)
+    public String showPurchasePage(Model model)
             throws ServiceException {
+        model.addAttribute("cart_items", cartService.getItemsInCart(userService.getAuthenticatedUser()));
         return "purchase";
     }
 

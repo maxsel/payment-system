@@ -9,7 +9,7 @@ public class Item implements Serializable {
     private String title;
     private String description;
     private Integer price;
-    // TODO: image???
+    private byte[] image;
     private ItemCategory category;
     private ItemStatus status;
     private Set<ItemInCart> itemsInCart;
@@ -81,6 +81,14 @@ public class Item implements Serializable {
 
     public void setItemsInCart(Set<ItemInCart> itemsInCart) {
         this.itemsInCart = itemsInCart;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override
