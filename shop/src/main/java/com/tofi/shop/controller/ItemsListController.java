@@ -70,6 +70,6 @@ public class ItemsListController {
         Item item = itemService.findById(id);
         User user = userService.getAuthenticatedUser();
         cartService.addItem(item, user);
-        return Integer.toString(cartService.getNumberOfItems());
+        return Integer.toString(cartService.getAmountOfItem(item, user));
     }
 }
