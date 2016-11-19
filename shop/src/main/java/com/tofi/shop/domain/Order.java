@@ -1,8 +1,5 @@
 package com.tofi.shop.domain;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -24,6 +21,12 @@ public class Order {
         this.instantDiscount = instantDiscount;
     }
 
+    public OrderStatus getStatus() {
+        if (historyList == null || historyList.size() == 0) return null;
+        historyList.sort((o1, o2) -> o1.getChangeDate().compareTo(o2.getChangeDate()));
+        return historyList.get(historyList.size()-1).getStatus();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -31,20 +34,7 @@ public class Order {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public OrderStatus getStatus() {
-        if (historyList == null || historyList.size() == 0) return null;
-        historyList.sort((o1, o2) -> o1.getChangeDate().compareTo(o2.getChangeDate()));
-        return historyList.get(historyList.size()-1).getStatus();
-    }
-
-    public void setStatus(OrderStatus status) {
-        if (historyList == null) {
-            historyList = new ArrayList<>();
-        }
-        historyList.add(new OrderHistory(null, this, status, Timestamp.valueOf(LocalDateTime.now())));
-    }
-
+    
     public List<OrderHistory> getHistoryList() {
         return historyList;
     }
