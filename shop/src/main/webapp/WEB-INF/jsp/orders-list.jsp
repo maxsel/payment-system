@@ -9,5 +9,10 @@
     <c:forEach items="${orders}" var="order">
         <h2>ID: ${order.id}</h2>
         <h2>STATUS: ${order.status.name}</h2>
+        <h2>ITEMS:</h2>
+        <c:forEach items="${order.items}" var="item">
+            <c:out value="${item}" />
+            <hr/>
+        </c:forEach>
     </c:forEach>
 </div>

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
 import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class WelcomeController {
@@ -31,13 +30,19 @@ public class WelcomeController {
     private final UserRole ROLE_ADMIN;
     private final UserRole ROLE_USER;
 
+    @Autowired @Qualifier("authMgr")
+    private AuthenticationManager authMgr;
+
+    @Autowired
+    private UserDetailsService userDetailsSvc;
+
     @Inject
     public WelcomeController(UserService userService, UserRoleService roleService) throws ServiceException {
         this.userService = userService;
         this.roleService = roleService;
         ROLE_ADMIN = roleService.findById(1);
         ROLE_USER = roleService.findById(2);
-        LOG.trace("----------Test log--------------");
+        LOG.trace("Test trace log: WelcomeController created");
     }
 
     @RequestMapping(value = {"/"})
@@ -79,7 +84,7 @@ public class WelcomeController {
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, user.getPassword(), userDetails.getAuthorities());
                 authMgr.authenticate(auth);
 
-                // redirect into secured main page if authentication successful
+                // redirect to secured main page if authentication successful
                 if(auth.isAuthenticated()) {
                     SecurityContextHolder.getContext().setAuthentication(auth);
                     return "redirect:/";
@@ -93,8 +98,4 @@ public class WelcomeController {
         }
         return "redirect:/items-list";
     }
-
-    @Autowired @Qualifier("authMgr") private AuthenticationManager authMgr;
-    @Autowired
-    private UserDetailsService userDetailsSvc;
 }

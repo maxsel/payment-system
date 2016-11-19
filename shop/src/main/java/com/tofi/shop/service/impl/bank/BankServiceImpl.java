@@ -6,6 +6,8 @@ import com.tofi.shop.service.*;
 import com.tofi.shop.service.impl.bank.Models.TransferResult;
 import com.tofi.shop.service.impl.bank.Models.UserExists;
 import com.tofi.shop.service.impl.bank.Models.UserMoney;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class BankServiceImpl implements BankService{
     private final String _bankServerPort = "8081";
     private final String _api = "/tofi-bank/rest";
     private final String _shopCardNumber = "CTOXYEB";
+    private static final Logger LOG = LogManager.getLogger(BankServiceImpl.class);
 
     private final Map<APIMethod, String> _methods = new HashMap<APIMethod, String>() {{
         put(APIMethod.CheckUserExists, "/checkUserExists");
@@ -49,9 +52,9 @@ public class BankServiceImpl implements BankService{
     public boolean checkCurrency(String cardNumber, String targetCurrency) throws IOException {
         String url = getApiUrl(_methods.get(APIMethod.CheckCurrency),
                 new Parameter("Card1", cardNumber));
-        System.out.println(url);
+        LOG.debug(url);
         String response = URLRequestSender.getResponse(url);
-        System.out.print(response);
+        LOG.debug(response);
         UserMoney userMoney = new ObjectMapper().readValue(response, UserMoney.class);
         return userMoney.getCurrency().equals(targetCurrency);
     }

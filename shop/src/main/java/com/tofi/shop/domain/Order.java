@@ -7,11 +7,11 @@ import java.util.List;
 
 public class Order {
     private Integer id;
-    //private OrderStatus status;
     private List<OrderHistory> historyList;
     private User user;
     private String uniqueCode;
     private int instantDiscount;
+    private List<ItemInOrder> items;
 
     public Order() {
     }
@@ -33,7 +33,7 @@ public class Order {
     }
 
     public OrderStatus getStatus() {
-        if (historyList.size() == 0) return null;
+        if (historyList == null || historyList.size() == 0) return null;
         historyList.sort((o1, o2) -> o1.getChangeDate().compareTo(o2.getChangeDate()));
         return historyList.get(historyList.size()-1).getStatus();
     }
@@ -42,7 +42,7 @@ public class Order {
         if (historyList == null) {
             historyList = new ArrayList<>();
         }
-        historyList.add(new OrderHistory(0, this, status, Timestamp.valueOf(LocalDateTime.now())));
+        historyList.add(new OrderHistory(null, this, status, Timestamp.valueOf(LocalDateTime.now())));
     }
 
     public List<OrderHistory> getHistoryList() {
@@ -75,5 +75,51 @@ public class Order {
 
     public void setInstantDiscount(int instantDiscount) {
         this.instantDiscount = instantDiscount;
+    }
+
+    public List<ItemInOrder> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemInOrder> items) {
+        this.items = items;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (instantDiscount != order.instantDiscount) return false;
+        if (id != null ? !id.equals(order.id) : order.id != null) return false;
+        if (historyList != null ? !historyList.equals(order.historyList) : order.historyList != null)
+            return false;
+        if (user != null ? !user.equals(order.user) : order.user != null)
+            return false;
+        return uniqueCode != null ? uniqueCode.equals(order.uniqueCode) : order.uniqueCode == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (historyList != null ? historyList.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (uniqueCode != null ? uniqueCode.hashCode() : 0);
+        result = 31 * result + instantDiscount;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", status=" + getStatus() +
+                ", user=" + user +
+                ", uniqueCode='" + uniqueCode + '\'' +
+                ", instantDiscount=" + instantDiscount +
+                '}';
     }
 }

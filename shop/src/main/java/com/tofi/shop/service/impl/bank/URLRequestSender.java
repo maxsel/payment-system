@@ -1,5 +1,8 @@
 package com.tofi.shop.service.impl.bank;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,6 +11,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 public class URLRequestSender {
+    private static final Logger LOG = LogManager.getLogger(URLRequestSender.class);
+
     public static String getResponse(String url)throws IOException{
         URL urlRequest = new URL(url);
         HttpURLConnection connection = (HttpURLConnection)urlRequest.openConnection();
@@ -17,9 +22,9 @@ public class URLRequestSender {
         byte [] dataRead = new byte[500];
         //int data =
         new BufferedInputStream( connection.getInputStream()).read(dataRead,0,500);
-        //System.out.println(data);
+        //LOG.debug(data);
         String str = new String(dataRead, StandardCharsets.UTF_8);
-        System.out.println(str);
+        LOG.debug(str);
         return str;
     }
 }

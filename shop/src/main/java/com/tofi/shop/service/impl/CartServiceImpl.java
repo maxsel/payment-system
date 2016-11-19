@@ -84,14 +84,15 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void clear() throws ServiceException {
+    public void clear(User user) throws ServiceException {
         for (ItemInCart itemInCart : itemInCartService.findAll()) {
-            itemInCartService.delete(itemInCart.getId());
+            if (itemInCart.getUser().equals(user)) {
+                itemInCartService.delete(itemInCart.getId());
+            }
         }
     }
 
     public List<ItemInCart> getItemsInCart(User user) throws ServiceException {
-        System.out.println(user.getId());
         return itemInCartService.findAll()
                 .stream()
                 .filter(itemInCart ->

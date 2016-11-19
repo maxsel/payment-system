@@ -16,9 +16,9 @@
         <File name="hibernate-query-appender" fileName="${hibernate-query-logfile}" append="false" immediateFlush="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
         </File>
-        <!--<Console name="STDOUT" target="SYSTEM_OUT">-->
-            <!--<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>-->
-        <!--</Console>-->
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
+        </Console>
     </Appenders>
 
     <Loggers>
@@ -37,6 +37,7 @@
         <logger name="com.tofi.shop">
             <level value="ALL"/>
             <appender-ref ref="project-appender" />
+            <appender-ref ref="STDOUT" />
         </logger>
         <Root level="ALL">
             <AppenderRef ref="root-appender"/>

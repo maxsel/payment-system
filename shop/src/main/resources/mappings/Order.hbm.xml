@@ -21,5 +21,9 @@
             <key column="ORDER_ID" />
             <one-to-many class="com.tofi.shop.domain.OrderHistory"/>
         </bag>
+        <bag name="items" cascade="delete" table="order_has_item" inverse="false" lazy="false">
+            <key column="ORDER_ID" />
+            <one-to-many class="com.tofi.shop.domain.ItemInOrder"/>
+        </bag>
     </class>
 </hibernate-mapping>
