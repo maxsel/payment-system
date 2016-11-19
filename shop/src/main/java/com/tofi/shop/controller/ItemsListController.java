@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,17 +28,20 @@ public class ItemsListController {
     private final CategoryService categoryService;
     private final CartService cartService;
     private final UserService userService;
+    private final BankService bankService;
 
     @Inject
     public ItemsListController(ItemService itemService, CategoryService categoryService,
-                               CartService cartService, UserService userService) {
+                               CartService cartService, UserService userService, BankService bankService) {
         Assert.notNull(itemService, "ItemService must be not null!");
         Assert.notNull(categoryService, "CategoryService must be not null!");
         Assert.notNull(cartService, "CartServicec must be not null");
+        Assert.notNull(bankService, "BankService must be not null");
         this.cartService = cartService;
         this.itemService = itemService;
         this.categoryService = categoryService;
         this.userService = userService;
+        this.bankService = bankService;
     }
 
     @ModelAttribute("items")
@@ -71,5 +75,15 @@ public class ItemsListController {
         User user = userService.getAuthenticatedUser();
         cartService.addItem(item, user);
         return Integer.toString(cartService.getAmountOfItem(item, user));
+    }
+
+    @RequestMapping("/sendRequestToBank")
+    public @ResponseBody String sendRequestToBank() throws ServiceException, IOException {
+        final String currency = "USD";
+        User user = userService.getAuthenticatedUser();
+        return Boolean.toString(bankService.checkCurrency(user.getCardId(), currency));
+        //User user = userService.getAuthenticatedUser();
+        //bankService.userExists(user.getCardId(), "123");
+        //return "test";
     }
 }

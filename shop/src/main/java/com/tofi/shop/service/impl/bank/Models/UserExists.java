@@ -11,6 +11,8 @@ public class UserExists {
         _exists = exists;
     }
 
+    public UserExists(){}
+
     public boolean getExists() {
         return _exists;
     }
