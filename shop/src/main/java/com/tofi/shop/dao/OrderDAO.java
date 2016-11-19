@@ -1,7 +1,6 @@
 package com.tofi.shop.dao;
 
-/**
- * Created by maxsel on 13.11.16.
- */
-public class OrderDAO {
+import com.tofi.shop.domain.Order;
+
+public interface OrderDAO extends GenericDAO<Integer,Order> {
 }

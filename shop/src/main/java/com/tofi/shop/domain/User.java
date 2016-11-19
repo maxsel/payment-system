@@ -11,6 +11,7 @@ public class User {
     private int discount;
     private Set<UserRole> roles;
     private List<ItemInCart> itemsInCart;
+    private List<Order> orders;
 
     public User() {
     }
@@ -77,6 +78,14 @@ public class User {
 
     public void setItemsInCart(List<ItemInCart> itemsInCart) {
         this.itemsInCart = itemsInCart;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

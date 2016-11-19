@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tofi.shop.domain">
+    <class name="Order" table="order">
+        <id name="id" type="int" unsaved-value="null">
+            <column name="ORDER_ID"/>
+            <generator class="identity" />
+        </id>
+        <property name="uniqueCode" type="string">
+            <column name="UNIQUE_CODE" sql-type="nvarchar2" not-null="true"/>
+        </property>
+        <property name="instantDiscount" type="int">
+            <column name="INSTANT_DISCOUNT" />
+        </property>
+        <many-to-one name="user" class="User" not-null="true" update="false" lazy="false">
+            <column name="USER_ID" />
+        </many-to-one>
+        <bag name="historyList" cascade="delete" table="order_history" inverse="false" lazy="false">
+            <key column="ORDER_ID" />
+            <one-to-many class="com.tofi.shop.domain.OrderHistory"/>
+        </bag>
+    </class>
+</hibernate-mapping>

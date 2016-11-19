@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tofi.shop.domain">
+    <class name="OrderHistory" table="order_history">
+        <id name="id" type="int" unsaved-value="null">
+            <column name="ORDER_HISTORY_ID"/>
+            <generator class="identity" />
+        </id>
+        <many-to-one name="order" class="Order" not-null="true" update="false" lazy="false">
+            <column name="ORDER_ID" />
+        </many-to-one>
+        <many-to-one name="status" class="OrderStatus" not-null="true" update="false" lazy="false">
+            <column name="STATUS_ID" />
+        </many-to-one>
+        <property name="changeDate" type="timestamp">
+            <column name="CHANGE_DATE" sql-type="datetime"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -28,5 +28,9 @@
             <key column="USER_ID" />
             <one-to-many class="com.tofi.shop.domain.ItemInCart"/>
         </bag>
+        <bag name="orders" cascade="delete" table="order" inverse="false" lazy="false">
+            <key column="USER_ID" />
+            <one-to-many class="com.tofi.shop.domain.Order"/>
+        </bag>
     </class>
 </hibernate-mapping>

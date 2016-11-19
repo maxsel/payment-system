@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.tofi.shop.domain">
+    <class name="ItemInOrder" table="order_has_item">
+        <id name="id" type="int" unsaved-value="null">
+            <column name="ORDER_HAS_ITEM_ID"/>
+            <generator class="identity" />
+        </id>
+        <many-to-one name="item" class="Item" update="false" lazy="false">
+            <column name="ITEM_ID" />
+        </many-to-one>
+        <many-to-one name="order" class="Order" update="false" lazy="false">
+            <column name="ORDER_ID" />
+        </many-to-one>
+        <property name="amount" type="int">
+            <column name="AMOUNT" />
+        </property>
+        <property name="instantPrice" type="int">
+            <column name="INSTANT_PRICE" />
+        </property>
+    </class>
+</hibernate-mapping>

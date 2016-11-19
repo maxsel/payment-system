@@ -3,6 +3,7 @@
     <Properties>
         <Property name="root-logfile">/logs/root-log-backend.txt</Property>
         <Property name="project-logfile">/logs/shop-log.txt</Property>
+        <Property name="hibernate-logfile">/logs/hibernate-log.txt</Property>
     </Properties>
 
     <Appenders>
@@ -10,6 +11,9 @@
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
         </File>
         <File name="project-appender" fileName="${project-logfile}" append="false" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="hibernate-appender" fileName="${hibernate-logfile}" append="false" immediateFlush="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
@@ -20,6 +24,9 @@
         </Root>
         <logger name="com.tofi.shop">
             <appender-ref ref="project-appender" />
+        </logger>
+        <logger name="org.hibernate">
+            <appender-ref ref="hibernate-appender" />
         </logger>
     </Loggers>
 

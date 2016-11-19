@@ -1,7 +1,4 @@
 package com.tofi.shop.dao;
 
-/**
- * Created by maxsel on 13.11.16.
- */
-public interface OrderHistory {
+public interface OrderHistoryDAO extends GenericDAO<Integer, com.tofi.shop.domain.OrderHistory> {
 }

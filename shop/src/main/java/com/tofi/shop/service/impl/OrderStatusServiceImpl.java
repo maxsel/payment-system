@@ -1,14 +1,18 @@
-package com.tofi.shop.service;
+package com.tofi.shop.service.impl;
 
 import com.tofi.shop.dao.DAOException;
 import com.tofi.shop.dao.OrderStatusDAO;
 import com.tofi.shop.domain.OrderStatus;
+import com.tofi.shop.service.OrderStatusService;
+import com.tofi.shop.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
 
+@Service
 public class OrderStatusServiceImpl implements OrderStatusService {
     private final OrderStatusDAO orderStatusDAO;
     private static final Logger LOG = LogManager.getLogger(OrderStatusServiceImpl.class);
