@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration monitorInterval="30">
+<Configuration>
     <Properties>
         <Property name="root-logfile">/logs/root-log-backend.txt</Property>
         <Property name="project-logfile">/logs/shop-log.txt</Property>
-        <Property name="hibernate-logfile">/logs/hibernate-log.txt</Property>
+        <Property name="hibernate-query-logfile">/logs/hibernate-query-log.txt</Property>
     </Properties>
 
     <Appenders>
@@ -13,21 +13,33 @@
         <File name="project-appender" fileName="${project-logfile}" append="false" immediateFlush="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
         </File>
-        <File name="hibernate-appender" fileName="${hibernate-logfile}" append="false" immediateFlush="true">
+        <File name="hibernate-query-appender" fileName="${hibernate-query-logfile}" append="false" immediateFlush="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>
         </File>
+        <!--<Console name="STDOUT" target="SYSTEM_OUT">-->
+            <!--<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n"/>-->
+        <!--</Console>-->
     </Appenders>
 
     <Loggers>
-        <Root level="debug">
-            <AppenderRef ref="root-appender"/>
-        </Root>
+        <!--<logger name="org.hibernate">-->
+            <!--<level value="ALL" />-->
+            <!--<appender-ref ref="hibernate-appender" />-->
+        <!--</logger>-->
+        <logger name="org.hibernate.SQL">
+            <level value="ALL"/>
+            <appender-ref ref="hibernate-query-appender" />
+        </logger>
+        <logger name="org.hibernate.type">
+            <level value="ALL"/>
+            <appender-ref ref="hibernate-query-appender" />
+        </logger>
         <logger name="com.tofi.shop">
+            <level value="ALL"/>
             <appender-ref ref="project-appender" />
         </logger>
-        <logger name="org.hibernate">
-            <appender-ref ref="hibernate-appender" />
-        </logger>
+        <Root level="ALL">
+            <AppenderRef ref="root-appender"/>
+        </Root>
     </Loggers>
-
 </Configuration>

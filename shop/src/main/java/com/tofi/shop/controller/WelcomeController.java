@@ -37,6 +37,7 @@ public class WelcomeController {
         this.roleService = roleService;
         ROLE_ADMIN = roleService.findById(1);
         ROLE_USER = roleService.findById(2);
+        LOG.trace("----------Test log--------------");
     }
 
     @RequestMapping(value = {"/"})

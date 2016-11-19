@@ -79,11 +79,11 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:4.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-taglibs:4.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-acl:4.0.2.RELEASE" />
-          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.12" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.1" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.1" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-1.2-api:2.6.1" />
-          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.1" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.7" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.7" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-1.2-api:2.7" />
+          <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.7" />
           <element id="library" level="project" name="Maven: com.jayway.jsonpath:json-path:2.2.0" />
           <element id="library" level="project" name="Maven: net.minidev:json-smart:2.2.1" />
           <element id="library" level="project" name="Maven: net.minidev:accessors-smart:1.1" />
