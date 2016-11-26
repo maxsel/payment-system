@@ -15,6 +15,8 @@
             <h2>Amount: ${cart_item.amount}</h2>
         </c:forEach>
         <input type="text" value="CVV">
-        <input type="submit" value="Order">
+        <c:if test="${!empty cart_items}">
+            <input type="submit" value="Order">
+        </c:if>
     </form:form>
 </div>

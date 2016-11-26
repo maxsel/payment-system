@@ -66,7 +66,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public int getAmountOfItem(Item item, User user) throws ServiceException {
-        return getItemInCartByItemAndUser(item, user).getAmount();
+        ItemInCart result = getItemInCartByItemAndUser(item, user);
+        return result == null ? 0 : result.getAmount();
     }
 
     @Override

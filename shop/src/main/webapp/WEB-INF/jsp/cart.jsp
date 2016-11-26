@@ -6,9 +6,10 @@
 
 <div>
     <h1>CART:</h1>
-    <a class="btn btn-primary" href="purchase">Make order</a>
+    <a class="btn btn-primary" href="purchase" id="make_order">Make order</a>
+    <label style="visibility: hidden;" id="items_count">${cart_items.size()}</label>
     <c:forEach items="${cart_items}" var="cart_item">
-        <div class = "panel panel-success">
+        <div class = "panel panel-success" id="item_${cart_item.item.id}">
             <div class="panel-heading">${cart_item.item.title}</div>
             <div class = "panel-body">
                 <ul class="list-inline">
@@ -24,6 +25,12 @@
 
     <script>
         $(document).ready(()=> {
+            // hide make_order button if list empty
+            (() => {
+                if($('#items_count') == 0) {
+                    $('#make_order').hide();
+                }
+            })();
             window.removeFromCart = function (itemId) {
                 var csrfParameter = '${_csrf.parameterName}';
                 var csrfToken = '${_csrf.token}';
@@ -44,33 +51,45 @@
                     success: function (res) {
                         console.log(res);
                         $('#' + itemId).text(res);
+                        // count of items is zero => remove item from list
+                        if(res == 0) {
+                            console.log('removing item from list');
+                            $('#item_' + itemId).remove();
+                            let new_items_count = (+$('#items_count').text()) - 1;
+                            $('#items_count').text(new_items_count);
+                            console.log('new_items_count', new_items_count);
+                            if(new_items_count <= 0) {
+                                console.log('items count == 0');
+                                $('#make_order').hide();
+                            }
+                        }
                     }
                 });
             };
 
-        window.addToCart = function (itemId) {
-            var csrfParameter = '${_csrf.parameterName}';
-            var csrfToken = '${_csrf.token}';
-            var csrfHeader = '${_csrf.headerName}';
+            window.addToCart = function (itemId) {
+                var csrfParameter = '${_csrf.parameterName}';
+                var csrfToken = '${_csrf.token}';
+                var csrfHeader = '${_csrf.headerName}';
 
-            var data = {};
-            var headers = {};
+                var data = {};
+                var headers = {};
 
-            data[csrfParameter] = csrfToken;
-            headers[csrfHeader] = csrfToken;
+                data[csrfParameter] = csrfToken;
+                headers[csrfHeader] = csrfToken;
 
-            $.ajax({
-                type: "POST",
-                async: false,
-                url: 'cart/add?id=' + itemId,
-                data: data,
-                headers: headers,
-                success: function (res) {
-                    console.log(res);
-                    $('#' + itemId).text(res);
-                }
-            });
-        };
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: 'cart/add?id=' + itemId,
+                    data: data,
+                    headers: headers,
+                    success: function (res) {
+                        console.log(res);
+                        $('#' + itemId).text(res);
+                    }
+                });
+            };
         });
     </script>
 </div>
