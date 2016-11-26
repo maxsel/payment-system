@@ -37,9 +37,13 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @ModelAttribute(name = "user")
+    public User formBackingObjectUser() {
+        return new User();
+    }
+
     @RequestMapping("/manage-users")
     public String showUsers(Model model) throws ServiceException {
-        model.addAttribute("user", new User());
         model.addAttribute("users",
                 userService
                         .findAll()
@@ -51,13 +55,17 @@ public class AdminController {
         return "users";
     }
 
-    /*@RequestMapping("/manage-users/block-user/{id}")
-    public String blockUser(@ModelAttribute("user") User user,
-                            BindingResult bindingResult) throws ServiceException {
-        LOG.debug("Blocking user: " + user);
+    @RequestMapping("/manage-users/update-user")
+    public String updateUser(@ModelAttribute("user") User user,
+                             BindingResult bindingResult) throws ServiceException {
+        LOG.debug("Updating user: " + user);
+        User userFromDB = userService.findById(user.getId());
+        user.setRoles(userFromDB.getRoles());
+        user.setItemsInCart(userFromDB.getItemsInCart());
+        user.setOrders(userFromDB.getOrders());
         userService.update(user);
         return "redirect:/admin/manage-users";
-    }*/
+    }
 
     @RequestMapping("/manage-users/block-user/{id}")
     public String blockUser(@PathVariable("id") int id) throws ServiceException {
