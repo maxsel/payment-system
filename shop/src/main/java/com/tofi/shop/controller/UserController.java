@@ -105,6 +105,9 @@ public class UserController {
         if (!bankService.checkAmountOfMoney(user.getCardId(), cartService.getTotalPrice()))
             return "error";
 
+        if (!bankService.pay(user.getCardId(), cvv, cartService.getTotalPrice()))
+            return "error";
+
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
         order.setUniqueCode(UUID.randomUUID().toString().substring(0, 8));
