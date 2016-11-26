@@ -31,7 +31,9 @@
         $(document).ready(()=> {
             // hide make_order button if list empty
             (() => {
-                if($('#items_count') == 0) {
+                console.log('ok');
+                if($('#items_count').text() == 0) {
+                    console.log('item_count = 0');
                     $('#make_order').hide();
                 }
             })();
