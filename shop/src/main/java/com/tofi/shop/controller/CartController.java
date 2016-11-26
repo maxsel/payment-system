@@ -43,6 +43,7 @@ public class CartController {
         model.addAttribute("total_cost", totalCost);
         model.addAttribute("discount", discount);
         model.addAttribute("discount_cost", totalCost - totalCost*discount/100);
+        model.addAttribute("user", userService.getAuthenticatedUser());
         return "cart";
     }
 

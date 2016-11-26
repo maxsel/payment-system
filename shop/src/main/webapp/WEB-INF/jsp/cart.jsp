@@ -10,7 +10,14 @@
     <h3><span class="alert alert-success btn-block" id="discount">Your current discount: ${discount}%</span></h3>
     <h3><span class="alert alert-success btn-block" id="total_cost">Total cost: ${total_cost}</span></h3>
 
-    <a class="btn btn-danger btn-block" href="purchase" id="make_order"><h3>Make order</h3></a>
+    <c:choose>
+        <c:when test="${!user.blocked}">
+            <a class="btn btn-danger btn-block" href="purchase" id="make_order"><h3>Make order</h3></a>
+        </c:when>
+        <c:otherwise>
+            <a class="btn btn-danger btn-block" id="make_order"><h3>You can't make orders (blocked)!</h3></a>
+        </c:otherwise>
+    </c:choose>
     <label style="visibility: hidden;" id="items_count">${cart_items.size()}</label>
     <c:forEach items="${cart_items}" var="cart_item">
         <div class = "panel panel-success" id="item_${cart_item.item.id}">
