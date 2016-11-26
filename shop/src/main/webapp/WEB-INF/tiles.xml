@@ -47,4 +47,9 @@
         <put-attribute name="title" value="Home" />
         <put-attribute name="body" value="/WEB-INF/jsp/home.jsp" />
     </definition>
+
+    <definition name="users" extends="template">
+        <put-attribute name="title" value="Users" />
+        <put-attribute name="body" value="/WEB-INF/jsp/users.jsp" />
+    </definition>
 </tiles-definitions>

@@ -62,7 +62,11 @@ public class UserController {
             throws ServiceException {
         User user = userService.getAuthenticatedUser();
         model.addAttribute("orders",
-                orderService.findAll().stream().filter(o -> o.getUser().getId() == user.getId()).collect(Collectors.toList()));
+                orderService
+                        .findAll()
+                        .stream()
+                        .filter(o -> o.getUser().getId() == user.getId())
+                        .collect(Collectors.toList()));
         return "orders-list";
     }
 
@@ -80,7 +84,7 @@ public class UserController {
         LOG.debug("--- MAKING ORDER ---");
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
-        order.setUniqueCode(UUID.randomUUID().toString());
+        order.setUniqueCode(UUID.randomUUID().toString().substring(0, 8));
         order.setInstantDiscount(0);
         Integer id = orderService.create(order);
         order = orderService.findById(id);
@@ -97,14 +101,6 @@ public class UserController {
             ItemInOrder itemInOrder = new ItemInOrder();
 
             itemInOrder.setOrder(order);
-            /*if (order.getHistoryList() == null) {
-                order.setHistoryList(new ArrayList<>());
-            }
-            OrderHistory orderHistory = new OrderHistory();
-            orderHistory.setOrder(order);
-            orderHistory.setStatus(STATUS_NEW);
-            orderHistory.setChangeDate(Timestamp.valueOf(LocalDateTime.now()));
-            order.getHistoryList().add(orderHistory);*/
             itemInOrder.setItem(itemInCart.getItem());
             itemInOrder.setAmount(itemInCart.getAmount());
             double discount = userService.getAuthenticatedUser().getDiscount()/100.0;

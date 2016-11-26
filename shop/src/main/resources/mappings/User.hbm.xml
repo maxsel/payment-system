@@ -20,6 +20,9 @@
         <property name="discount" type="int">
             <column name="DISCOUNT" />
         </property>
+        <property name="blocked" type="boolean">
+            <column name="BLOCKED" />
+        </property>
         <set name="roles" cascade="all" table="user_has_role" inverse="false" lazy="false">
             <key column="USER_ID"/>
             <many-to-many column="ROLE_ID" class="com.tofi.shop.domain.UserRole"/>

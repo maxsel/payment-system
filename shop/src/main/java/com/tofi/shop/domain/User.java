@@ -9,6 +9,7 @@ public class User {
     private String password;
     private String cardId;
     private int discount;
+    private boolean blocked;
     private Set<UserRole> roles;
     private List<ItemInCart> itemsInCart;
     private List<Order> orders;
@@ -16,12 +17,13 @@ public class User {
     public User() {
     }
 
-    public User(int id, String login, String password, String cardId, int discount) {
+    public User(int id, String login, String password, String cardId, int discount, boolean blocked) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.cardId = cardId;
         this.discount = discount;
+        this.blocked = blocked;
     }
 
     public int getId() {
@@ -88,6 +90,14 @@ public class User {
         this.orders = orders;
     }
 
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
+    }
+
     @Override
     public boolean equals(Object o) { // by login adn password only
         if (this == o) return true;
@@ -116,6 +126,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", cardId='" + cardId + '\'' +
                 ", discount=" + discount +
+                ", blocked=" + blocked +
                 '}';
     }
 }

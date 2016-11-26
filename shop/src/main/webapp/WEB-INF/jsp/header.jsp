@@ -38,6 +38,9 @@
             <security:authorize access="hasRole('ROLE_USER')">
                 <li><a href="${rootUrl}user/cart">Cart</a></li>
             </security:authorize>
+            <security:authorize access="hasRole('ROLE_ADMIN')">
+                <li><a href="${rootUrl}admin/manage-users">Manage users</a></li>
+            </security:authorize>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
