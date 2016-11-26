@@ -20,6 +20,7 @@ public class BankServiceImpl implements BankService{
     private final String _bankServerPort = "8081";
     private final String _api = "/tofi-bank/rest";
     private final String _shopCardNumber = "CTOXYEB";
+    private final String _targetCurrency = "BYN";
     private static final Logger LOG = LogManager.getLogger(BankServiceImpl.class);
 
     private final Map<APIMethod, String> _methods = new HashMap<APIMethod, String>() {{
@@ -49,14 +50,14 @@ public class BankServiceImpl implements BankService{
     }
 
     @Override
-    public boolean checkCurrency(String cardNumber, String targetCurrency) throws IOException {
+    public boolean checkCurrency(String cardNumber) throws IOException {
         String url = getApiUrl(_methods.get(APIMethod.CheckCurrency),
                 new Parameter("Card1", cardNumber));
         LOG.debug(url);
         String response = URLRequestSender.getResponse(url);
         LOG.debug(response);
         UserMoney userMoney = new ObjectMapper().readValue(response, UserMoney.class);
-        return userMoney.getCurrency().equals(targetCurrency);
+        return userMoney.getCurrency().equals(_targetCurrency);
     }
 
     private String getBankUrl(){ return _bankServer + ':' + _bankServerPort + _api; }

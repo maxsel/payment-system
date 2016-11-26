@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,17 +30,19 @@ public class UserController {
     private OrderStatusService orderStatusService;
     private ItemInOrderService itemInOrderService;
     private OrderHistoryService orderHistoryService;
+    private BankService bankService;
 
     @Inject
     public UserController(UserService userService, CartService cartService, OrderService orderService,
                           OrderStatusService orderStatusService, ItemInOrderService itemInOrderService,
-                          OrderHistoryService orderHistoryService) {
+                          OrderHistoryService orderHistoryService, BankService bankService) {
         this.userService = userService;
         this.cartService = cartService;
         this.orderService = orderService;
         this.orderStatusService = orderStatusService;
         this.itemInOrderService = itemInOrderService;
         this.orderHistoryService = orderHistoryService;
+        this.bankService = bankService;
     }
 
     @ModelAttribute("user")
@@ -73,13 +76,22 @@ public class UserController {
         return "purchase";
     }
 
+    @RequestMapping("/checkOrder")
+    public String checkOrder() throws ServiceException, IOException {
+        User user = userService.getAuthenticatedUser();
+        if (bankService.checkCurrency(user.getCardId()))
+            return "redirect:/user/order";
+        return "currency-confirm";
+    }
+
     @RequestMapping("/order")
-    public String showOrderPage() throws ServiceException {
+    public String showOrderPage() throws ServiceException, IOException {
         // TODO: payment stuff, interaction with bank
 
+        User user = userService.getAuthenticatedUser();
         LOG.debug("--- MAKING ORDER ---");
         Order order = new Order();
-        order.setUser(userService.getAuthenticatedUser());
+        order.setUser(user);
         order.setUniqueCode(UUID.randomUUID().toString());
         order.setInstantDiscount(0);
         Integer id = orderService.create(order);

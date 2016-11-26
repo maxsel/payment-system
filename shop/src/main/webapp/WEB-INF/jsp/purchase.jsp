@@ -8,7 +8,7 @@
 <c:url var="rootUrl" value="/user" />
 
 <div>
-    <form:form method="post" action="${rootUrl}/order" >
+    <form:form method="post" action="${rootUrl}/checkOrder" >
         <h1>Order:</h1>
         <c:forEach items="${cart_items}" var="cart_item">
             <h2>Item: ${cart_item.item}</h2>

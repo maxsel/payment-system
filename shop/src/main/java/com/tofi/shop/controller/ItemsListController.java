@@ -76,14 +76,4 @@ public class ItemsListController {
         cartService.addItem(item, user);
         return Integer.toString(cartService.getAmountOfItem(item, user));
     }
-
-    @RequestMapping("/sendRequestToBank")
-    public @ResponseBody String sendRequestToBank() throws ServiceException, IOException {
-        final String currency = "USD";
-        User user = userService.getAuthenticatedUser();
-        return Boolean.toString(bankService.checkCurrency(user.getCardId(), currency));
-        //User user = userService.getAuthenticatedUser();
-        //bankService.userExists(user.getCardId(), "123");
-        //return "test";
-    }
 }
