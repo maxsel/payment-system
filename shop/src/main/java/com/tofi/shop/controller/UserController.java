@@ -101,6 +101,10 @@ public class UserController {
         LOG.debug(cvv);
         User user = userService.getAuthenticatedUser();
         LOG.debug("--- MAKING ORDER ---");
+
+        if (!bankService.checkAmountOfMoney(user.getCardId(), cartService.getTotalPrice()))
+            return "error";
+
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
         order.setUniqueCode(UUID.randomUUID().toString().substring(0, 8));

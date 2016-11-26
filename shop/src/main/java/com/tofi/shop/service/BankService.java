@@ -8,4 +8,6 @@ public interface BankService {
     boolean userExists(String cardNumber, String cvv) throws IOException;
 
     boolean checkCurrency(String cardNumber) throws IOException;
+
+    boolean checkAmountOfMoney(String cardNumber,  int amountOfMoney) throws  IOException;
 }

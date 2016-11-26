@@ -61,6 +61,17 @@ public class BankServiceImpl implements BankService{
         return userMoney.getCurrency().equals(_targetCurrency);
     }
 
+    @Override
+    public boolean checkAmountOfMoney(String cardNumber, int amountOfMoney) throws IOException {
+        String url = getApiUrl(_methods.get(APIMethod.CheckCurrency),
+                new Parameter("Card1", cardNumber));
+        LOG.debug(url);
+        String response = URLRequestSender.getResponse(url);
+        LOG.debug(response);
+        UserMoney userMoney = new ObjectMapper().readValue(response, UserMoney.class);
+        return amountOfMoney <= userMoney.getAmount();
+    }
+
     private String getBankUrl(){ return _bankServer + ':' + _bankServerPort + _api; }
 
     private String getApiUrl(String methodUrl, Parameter... params){
