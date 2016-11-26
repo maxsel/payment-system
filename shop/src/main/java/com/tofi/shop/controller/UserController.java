@@ -97,7 +97,7 @@ public class UserController {
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
         order.setUniqueCode(UUID.randomUUID().toString().substring(0, 8));
-        order.setInstantDiscount(0);
+        order.setInstantDiscount(user.getDiscount());
         Integer id = orderService.create(order);
         order = orderService.findById(id);
 

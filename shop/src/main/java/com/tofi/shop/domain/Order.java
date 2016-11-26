@@ -77,7 +77,8 @@ public class Order {
 
     public long getTotalCost() {
         if (items == null) return 0;
-        return items.stream().mapToLong(i -> i.getAmount()*i.getInstantPrice()).sum();
+        long totalCost = items.stream().mapToLong(i -> i.getAmount()*i.getInstantPrice()).sum();
+        return (int)(totalCost*(1-instantDiscount/100.0));
     }
 
     @Override

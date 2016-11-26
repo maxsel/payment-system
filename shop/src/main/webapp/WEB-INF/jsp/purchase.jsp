@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:url var="rootUrl" value="/" />
+<c:url var="rootUrl" value="/user" />
 
 <div>
     <form:form method="post" action="${rootUrl}/checkOrder" >
