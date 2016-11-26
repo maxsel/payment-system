@@ -5,15 +5,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<c:url var="rootUrl" value="/user" />
+<c:url var="rootUrl" value="/" />
 
 <div>
     <form:form method="post" action="${rootUrl}/order" >
-        <h1>Order:</h1>
+        <div class="alert alert-success"><h3>Your Order</h3></div>
+
         <c:forEach items="${cart_items}" var="cart_item">
-            <h2>Item: ${cart_item.item}</h2>
-            <h2>Amount: ${cart_item.amount}</h2>
+            <div class = "panel panel-success" id="item_${cart_item.item.id}">
+                <div class="panel-heading"><h3>${cart_item.item.title}</h3></div>
+                <div class = "panel-body">
+                    <ul class="list-inline">
+                        <li><img width=150 src="${rootUrl}resources/info?itemId=${cart_item.item.id}"/></li>
+                        <li>${cart_item.item.description}</li>
+                        <li><h2>Amount: ${cart_item.amount}</h2></li>
+                    </ul>
+                </div>
+            </div>
         </c:forEach>
+
         <input type="text" value="CVV">
         <c:if test="${!empty cart_items}">
             <input type="submit" value="Order">
