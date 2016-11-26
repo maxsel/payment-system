@@ -6,6 +6,9 @@
 
 <div>
     <h1>CART:</h1>
+    <h2 id="total_cost">Total cost: ${total_cost}</h2>
+    <h2 id="discount">Your current discount: ${discount}%</h2>
+    <h2 id="discount_cost">Cost with discount: ${discount_cost}</h2>
     <a class="btn btn-primary" href="purchase">Make order</a>
     <c:forEach items="${cart_items}" var="cart_item">
         <div class = "panel panel-success">

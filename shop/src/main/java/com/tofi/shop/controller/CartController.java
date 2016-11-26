@@ -8,6 +8,7 @@ import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
 import com.tofi.shop.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -33,7 +34,15 @@ public class CartController {
     }
 
     @RequestMapping("")
-    public String showCart() {
+    public String showCart(Model model) throws ServiceException {
+        long totalCost = cartService.getItemsInCart(userService.getAuthenticatedUser())
+                .stream()
+                .mapToLong(i -> i.getAmount()*i.getItem().getPrice())
+                .sum();
+        long discount = userService.getAuthenticatedUser().getDiscount();
+        model.addAttribute("total_cost", totalCost);
+        model.addAttribute("discount", discount);
+        model.addAttribute("discount_cost", totalCost - totalCost*discount/100);
         return "cart";
     }
 

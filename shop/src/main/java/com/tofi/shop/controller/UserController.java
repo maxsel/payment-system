@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -79,7 +80,7 @@ public class UserController {
         LOG.debug("--- MAKING ORDER ---");
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
-        order.setUniqueCode("testuniquecode");
+        order.setUniqueCode(UUID.randomUUID().toString());
         order.setInstantDiscount(0);
         Integer id = orderService.create(order);
         order = orderService.findById(id);
@@ -106,7 +107,8 @@ public class UserController {
             order.getHistoryList().add(orderHistory);*/
             itemInOrder.setItem(itemInCart.getItem());
             itemInOrder.setAmount(itemInCart.getAmount());
-            itemInOrder.setInstantPrice(itemInCart.getItem().getPrice());
+            double discount = userService.getAuthenticatedUser().getDiscount()/100.0;
+            itemInOrder.setInstantPrice((int)(itemInCart.getItem().getPrice()*(1-discount)));
             itemInOrderService.create(itemInOrder);
         }
         cartService.clear(userService.getAuthenticatedUser());

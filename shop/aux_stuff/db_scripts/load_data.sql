@@ -29,11 +29,11 @@ insert into item_status(status_id, status_name) values(1, 'AVAILABLE');
 insert into item_status(status_id, status_name) values(2, 'NOT_AVAILABLE');
 
 insert into item(item_id, item_title, item_desc, item_price, item_cat_id, item_status_id)
-  values(1, 'item1', 'desc1', 20.5, 1, 1);
+  values(1, 'item1', 'desc1', 3, 1, 1);
 insert into item(item_id, item_title, item_desc, item_price, item_cat_id, item_status_id)
-  values(2, 'item2', 'desc2', 12.6, 1, 1);
+  values(2, 'item2', 'desc2', 5, 1, 1);
 insert into item(item_id, item_title, item_desc, item_price, item_cat_id, item_status_id)
-  values(3, 'item3', 'desc3', 50.3, 1, 2);
+  values(3, 'item3', 'desc3', 7, 1, 2);
 
 
 insert into order_status(status_id, status_name)

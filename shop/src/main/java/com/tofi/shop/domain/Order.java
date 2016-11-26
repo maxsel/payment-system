@@ -75,6 +75,11 @@ public class Order {
         this.items = items;
     }
 
+    public long getTotalCost() {
+        if (items == null) return 0;
+        return items.stream().mapToLong(i -> i.getAmount()*i.getInstantPrice()).sum();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,6 +115,7 @@ public class Order {
                 ", user=" + user +
                 ", uniqueCode='" + uniqueCode + '\'' +
                 ", instantDiscount=" + instantDiscount +
+                ", totalCost=" + getTotalCost() +
                 '}';
     }
 }
