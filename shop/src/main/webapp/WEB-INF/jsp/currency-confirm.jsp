@@ -10,17 +10,13 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center">
-                <div class="well">make order in different currency?</div>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12 my-col text-center">
-                <form:form action="${rootUrl}/order/" method="post">
-                    <input name="cvv" value="${cvv}" type="hidden">
-                    <input class="btn btn-success" type="submit" value="Yes" class="btn">
-                </form:form>
-                <a class="btn btn-success" href="/tofi-shop" class="btn">No</a>
-            </div>
+        <div class="well text-center">make order in different currency?</div>
+        <div class="text-center">
+            <form:form action="${rootUrl}/order/" method="post">
+                <input name="cvv" value="${cvv}" type="hidden">
+                <input class="btn btn-success" type="submit" value="Yes">
+                <a class="btn btn-success" href="/tofi-shop">No</a>
+            </form:form>
         </div>
     </div>
 </body>
