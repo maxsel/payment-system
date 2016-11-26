@@ -28,6 +28,11 @@
         <put-attribute name="body" value="/WEB-INF/jsp/order.jsp"/>
     </definition>
 
+    <definition name="currency-confirm" extends="template">
+        <put-attribute name="title" value="Currency-Confirm"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/currency-confirm.jsp"/>
+    </definition>
+
     <definition name="profile" extends="template">
         <put-attribute name="title" value="Profile"/>
         <put-attribute name="body" value="/WEB-INF/jsp/profile.jsp"/>
