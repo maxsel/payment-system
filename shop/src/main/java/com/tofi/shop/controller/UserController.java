@@ -1,8 +1,10 @@
 package com.tofi.shop.controller;
 
 
+import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
 import com.tofi.shop.domain.*;
 import com.tofi.shop.service.*;
+import org.apache.commons.logging.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -81,17 +84,21 @@ public class UserController {
     }
 
     @RequestMapping("/checkOrder")
-    public String checkOrder() throws ServiceException, IOException {
+    public String checkOrder(@RequestParam(name = "cvv")String cvv, Model model) throws ServiceException, IOException {
+        model.addAttribute("cvv", cvv);
+        LOG.debug("CVV - check order");
+        LOG.debug(cvv);
         User user = userService.getAuthenticatedUser();
         if (bankService.checkCurrency(user.getCardId()))
-            return "redirect:/user/order";
+            return showOrderPage(cvv);
         return "currency-confirm";
     }
 
     @RequestMapping("/order")
-    public String showOrderPage() throws ServiceException, IOException {
+    public String showOrderPage(@RequestParam("cvv") String cvv) throws ServiceException, IOException {
         // TODO: payment stuff, interaction with bank
 
+        LOG.debug(cvv);
         User user = userService.getAuthenticatedUser();
         LOG.debug("--- MAKING ORDER ---");
         Order order = new Order();

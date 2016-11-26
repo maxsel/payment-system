@@ -23,7 +23,7 @@
             </div>
         </c:forEach>
 
-        <input type="text" value="CVV">
+        <input type="text" value="CVV" name="cvv">
         <c:if test="${!empty cart_items}">
             <input type="submit" value="Order">
         </c:if>
