@@ -7,7 +7,6 @@
 
 <c:url var="rootUrl" value="/"/>
 
-<img src="resources/info?itemId=1"/>
 <h1>Items list</h1>
 <div>
     <c:forEach items="${items}" var="item">
@@ -16,6 +15,7 @@
                 <div class="panel-heading"><h3>${item.title}</h3></div>
                 <div class = "panel-body">
                     <ul class="list-inline">
+                        <img width=150 src="resources/info?itemId=${item.id}"/>
                         <li>${item.id}</li>
                         <li>${item.description}</li>
                         <security:authorize access="hasRole('ROLE_USER')">
