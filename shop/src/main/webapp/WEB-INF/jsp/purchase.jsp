@@ -15,7 +15,7 @@
                 <div class="panel-heading"><h3>${cart_item.item.title}</h3></div>
                 <div class = "panel-body">
                     <ul class="list-inline">
-                        <li><img width=150 src="${rootUrl}resources/info?itemId=${cart_item.item.id}"/></li>
+                        <li><img width="150" src="/tofi-shop/resources/info?itemId=${cart_item.item.id}"/></li>
                         <li>${cart_item.item.description}</li>
                         <li><h2>Amount: ${cart_item.amount}</h2></li>
                     </ul>

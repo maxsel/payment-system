@@ -15,7 +15,7 @@
                 <div class="panel-heading"><h3>${item.title}</h3></div>
                 <div class = "panel-body">
                     <ul class="list-inline">
-                        <li><img width=150 src="resources/info?itemId=${item.id}"/></li>
+                        <li><img width="150" src="resources/info?itemId=${item.id}"/></li>
                         <li>${item.id}</li>
                         <li>${item.description}</li>
                         <security:authorize access="hasRole('ROLE_USER')">
