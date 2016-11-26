@@ -11,7 +11,7 @@
 <div>
     <c:forEach items="${items}" var="item">
         <div>
-            <div class = "panel panel-success">
+            <div class = "panel panel-success" id="item_${item.id}">
                 <div class="panel-heading"><h3>${item.title}</h3></div>
                 <div class = "panel-body">
                     <ul class="list-inline">
@@ -52,6 +52,9 @@
                     headers: headers,
                     success: function (res) {
                         console.log(res);
+                        let item = $('#item_' + itemId);
+                        item.removeClass('panel-success');
+                        item.addClass('panel-danger');
                     }
                 });
             };
