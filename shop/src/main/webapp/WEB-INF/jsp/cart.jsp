@@ -44,6 +44,14 @@
                     $('#make_order').hide();
                 }
             })();
+
+            window.updateItem = (itemId,model) => {
+                $('#' + itemId).text(model.itemsCount);
+                $('#discount_cost').text(model.totalPriceWithDiscount);
+                $('#discount').text(model.discount);
+                $('#total_cost').text(model.totalPrice);
+            };
+
             window.removeFromCart = function (itemId) {
                 var csrfParameter = '${_csrf.parameterName}';
                 var csrfToken = '${_csrf.token}';
@@ -63,7 +71,7 @@
                     headers: headers,
                     success: function (res) {
                         console.log(res);
-                        $('#' + itemId).text(res);
+                        updateItem(itemId, res);
                         // count of items is zero => remove item from list
                         if(res == 0) {
                             console.log('removing item from list');
@@ -99,7 +107,7 @@
                     headers: headers,
                     success: function (res) {
                         console.log(res);
-                        $('#' + itemId).text(res);
+                        updateItem(itemId, res);
                     }
                 });
             };
