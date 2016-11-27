@@ -3,6 +3,7 @@ package com.tofi.shop.controller;
 import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemCategory;
 import com.tofi.shop.domain.User;
+import com.tofi.shop.dto.ajax.ItemAction;
 import com.tofi.shop.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,13 +68,13 @@ public class ItemsListController {
     }
 
     @PostMapping("/add")
-    public @ResponseBody String addItemToCart(@RequestParam(value = "id", defaultValue = "-1") String itemId)
+    public @ResponseBody ItemAction addItemToCart(@RequestParam(value = "id", defaultValue = "-1") String itemId)
             throws ServiceException {
         Integer id = Integer.parseInt(itemId);
-        if (id == -1) return "FAIL";
         Item item = itemService.findById(id);
         User user = userService.getAuthenticatedUser();
         cartService.addItem(item, user);
-        return Integer.toString(cartService.getAmountOfItem(item, user));
+        int totalPrice = cartService.getTotalPrice();
+        return new ItemAction(cartService.getAmountOfItem(item, user), totalPrice, (int)(totalPrice * (1-user.getDeltaDiscount())), user.getDiscount());
     }
 }
