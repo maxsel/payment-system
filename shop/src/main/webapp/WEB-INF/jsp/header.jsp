@@ -27,11 +27,18 @@
                 </ul>
             </li>
             <security:authorize access="hasRole('ROLE_USER')">
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">My Actions<span class="caret"></span></a>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User Actions<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="/user/orders">Orders</a></li>
-                        <li><a href="/user/profile">Profile</a></li>
-                        <li><a href="/user/purchase">Purchase</a></li>
+                        <li><a href="${rootUrl}user/orders">Orders</a></li>
+                        <li><a href="${rootUrl}user/profile">Profile</a></li>
+                        <li><a href="${rootUrl}user/purchase">Purchase</a></li>
+                    </ul>
+                </li>
+            </security:authorize>
+            <security:authorize access="hasRole('ROLE_ADMIN')">
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin Actions<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="${rootUrl}admin/orders">Orders</a></li>
                     </ul>
                 </li>
             </security:authorize>
