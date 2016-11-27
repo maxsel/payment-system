@@ -5,14 +5,37 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div>
-    <h1>ORDERS:</h1>
+    <div class="alert alert-success"><h1>Your Orders</h1></div>
     <c:forEach items="${orders}" var="order">
-        <h2>ID: ${order.id}</h2>
-        <h2>STATUS: ${order.status.name}</h2>
-        <h2>ITEMS:</h2>
-        <c:forEach items="${order.items}" var="item">
-            <c:out value="${item}" />
-            <hr/>
-        </c:forEach>
+        <div class = "panel panel-success" id="item_${order.id}">
+            <div class="panel-heading"><h2>STATUS: ${order.status.name}</h2></div>
+            <div class = "panel-body">
+                <h2>ITEMS:</h2>
+                <ul class="list-inline">
+                    <c:forEach items="${order.items}" var="item">
+                        <li>
+                            <div class="panel panel-success">
+                                <div class="panel-heading"><h5>${item.item.title}</h5></div>
+                                <ul class="list">
+                                    <li>
+                                        price: ${item.item.price}
+                                    </li>
+                                    <li>
+                                        description: ${item.item.description}
+                                    </li>
+                                    <li>
+                                        amount: ${item.amount}
+                                    </li>
+                                    <li>
+                                        instant price: ${item.instantPrice}
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
+
     </c:forEach>
 </div>
