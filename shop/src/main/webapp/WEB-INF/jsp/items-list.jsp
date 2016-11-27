@@ -22,6 +22,9 @@
                             <li>
                                 <h3>${item.title}</h3>
                             </li>
+                            <li class="pull-right">
+                                ${item.price} BYN
+                            </li>
                             <security:authorize access="hasRole('ROLE_ADMIN')">
                                 <li class="pull-right">
                                     <a href="${rootUrl}admin/items/${item.id}/edit" class="btn btn-default pull-right">Edit</a>
