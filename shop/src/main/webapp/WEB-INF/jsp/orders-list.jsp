@@ -14,20 +14,11 @@
                 <ul class="list-inline">
                     <c:forEach items="${order.items}" var="item">
                         <li>
-                            <div class="panel panel-success">
-                                <div class="panel-heading"><h5>${item.item.title}</h5></div>
-                                <ul class="list">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" style="height: 40px;"><h5>${item.item.title}</h5></div>
+                                <ul class="list-inline list-cell">
                                     <li>
-                                        price: ${item.item.price}
-                                    </li>
-                                    <li>
-                                        description: ${item.item.description}
-                                    </li>
-                                    <li>
-                                        amount: ${item.amount}
-                                    </li>
-                                    <li>
-                                        instant price: ${item.instantPrice}
+                                        ${item.amount} x ${item.item.price} BYN = ${item.instantPrice} BYN
                                     </li>
                                 </ul>
                             </div>
