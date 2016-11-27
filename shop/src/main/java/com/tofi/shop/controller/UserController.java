@@ -1,10 +1,8 @@
 package com.tofi.shop.controller;
 
 
-import com.sun.org.apache.xml.internal.resolver.helpers.Debug;
 import com.tofi.shop.domain.*;
 import com.tofi.shop.service.*;
-import org.apache.commons.logging.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;

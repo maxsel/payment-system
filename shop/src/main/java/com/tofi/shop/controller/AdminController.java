@@ -1,9 +1,6 @@
 package com.tofi.shop.controller;
 
-import com.tofi.shop.domain.Item;
-import com.tofi.shop.domain.ItemCategory;
 import com.tofi.shop.domain.User;
-import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
 import com.tofi.shop.service.UserService;
 import org.apache.logging.log4j.LogManager;
@@ -11,14 +8,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -26,14 +20,10 @@ import java.util.stream.Collectors;
 public class AdminController {
     private static final Logger LOG = LogManager.getLogger(AdminController.class);
 
-    private ItemService itemService;
     private UserService userService;
-
     @Inject
-    AdminController(ItemService itemService, UserService userService) {
-        Assert.notNull(itemService, "ItemService must be not null");
+    AdminController(UserService userService) {
         Assert.notNull(userService, "UserService must be not null");
-        this.itemService = itemService;
         this.userService = userService;
     }
 
@@ -56,8 +46,7 @@ public class AdminController {
     }
 
     @RequestMapping("/manage-users/update-user")
-    public String updateUser(@ModelAttribute("user") User user,
-                             BindingResult bindingResult) throws ServiceException {
+    public String updateUser(@ModelAttribute("user") User user) throws ServiceException {
         LOG.debug("Updating user: " + user);
         User userFromDB = userService.findById(user.getId());
         user.setRoles(userFromDB.getRoles());
@@ -74,32 +63,5 @@ public class AdminController {
         user.setBlocked(!user.isBlocked());
         userService.update(user);
         return "redirect:/admin/manage-users";
-    }
-
-    @RequestMapping("/manage-items")
-    public String manageItems() {
-        return "admin-manage";
-    }
-
-    @ModelAttribute("newItem")
-    public Item populateNewItemDTO(){
-        return new Item();
-    }
-
-    @ModelAttribute("categories")
-    public List<ItemCategory> populateCategoriesDTO(){
-        return new ArrayList<ItemCategory>(){{
-            add(new ItemCategory(1, "category 1"));
-            add(new ItemCategory(1, "category 2"));
-            add(new ItemCategory(1, "category 3"));
-            add(new ItemCategory(1, "category 4"));
-        }};
-    }
-
-    @RequestMapping("/manage-items/add")
-    public String addItem(@ModelAttribute("newItem") Item item,
-                          BindingResult bindingResult) throws ServiceException {
-        itemService.create(item);
-        return "admin-manage";
     }
 }

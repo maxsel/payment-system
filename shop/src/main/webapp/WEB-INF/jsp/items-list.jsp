@@ -8,11 +8,19 @@
 <c:url var="rootUrl" value="/"/>
 
 <h1>Items list</h1>
+<security:authorize access="hasRole('ROLE_ADMIN')">
+    <a href="${rootUrl}admin/items/add" class="pull-right">Add item</a>
+</security:authorize>
 <div>
     <c:forEach items="${items}" var="item">
         <div>
             <div class = "panel panel-success" id="item_${item.id}">
-                <div class="panel-heading"><h3>${item.title}</h3></div>
+                <div class="panel-heading">
+                    <h3>${item.title}</h3>
+                    <security:authorize access="hasRole('ROLE_ADMIN')">
+                        <a href="${rootUrl}admin/items/${item.id}/edit" class="btn btn-default pull-right">Edit</a>
+                    </security:authorize>
+                </div>
                 <div class = "panel-body">
                     <ul class="list-inline">
                         <li><img width="150" src="resources/info?itemId=${item.id}"/></li>

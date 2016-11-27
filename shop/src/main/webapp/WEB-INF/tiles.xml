@@ -8,9 +8,9 @@
         <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
     </definition>
 
-    <definition name="admin-manage" extends="template">
+    <definition name="edit-item" extends="template">
         <put-attribute name="title" value="Orders"/>
-        <put-attribute name="body" value="/WEB-INF/jsp/admin-manage.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/edit-item.jsp"/>
     </definition>
 
     <definition name="items-list" extends="template">
