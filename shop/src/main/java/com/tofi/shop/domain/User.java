@@ -62,6 +62,10 @@ public class User {
         return discount;
     }
 
+    public float getDeltaDiscount() {
+        return discount / 100f;
+    }
+
     public void setDiscount(int discount) {
         this.discount = discount;
     }

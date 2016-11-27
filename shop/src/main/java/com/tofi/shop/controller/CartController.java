@@ -3,6 +3,7 @@ package com.tofi.shop.controller;
 import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemInCart;
 import com.tofi.shop.domain.User;
+import com.tofi.shop.dto.ajax.ItemAction;
 import com.tofi.shop.service.CartService;
 import com.tofi.shop.service.ItemService;
 import com.tofi.shop.service.ServiceException;
@@ -48,24 +49,22 @@ public class CartController {
     }
 
     @PostMapping("/remove")
-    @ResponseBody String delete(@RequestParam(value = "id", defaultValue = "-1") String itemId)
-            throws ServiceException {
-        if (itemId.equals("-1")) return "FAIL";
+    public @ResponseBody ItemAction delete(@RequestParam(value = "id", defaultValue = "-1") String itemId) throws ServiceException {
         int id = Integer.parseInt(itemId);
         Item item = itemService.findById(id);
         User user = userService.getAuthenticatedUser();
         cartService.decAmountOfItem(item, user);
-        return Integer.toString(cartService.getAmountOfItem(item, user));
+        int totalPrice = cartService.getTotalPrice();
+        return new ItemAction(cartService.getAmountOfItem(item, user), totalPrice, (int)(totalPrice * (1-user.getDeltaDiscount())), user.getDiscount());
     }
 
     @PostMapping("/add")
-    @ResponseBody String add(@RequestParam(value = "id", defaultValue = "-1") String itemId)
-            throws ServiceException {
-        if (itemId == "-1") return "FAIL";
+    public @ResponseBody ItemAction add(@RequestParam(value = "id", defaultValue = "-1") String itemId) throws ServiceException {
         int id = Integer.parseInt(itemId);
         Item item = itemService.findById(id);
         User user = userService.getAuthenticatedUser();
         cartService.incAmountOfItem(item, user);
-        return Integer.toString(cartService.getAmountOfItem(item, user));
+        int totalPrice = cartService.getTotalPrice();
+        return new ItemAction(cartService.getAmountOfItem(item, user), totalPrice, (int)(totalPrice * (1-user.getDeltaDiscount())), user.getDiscount());
     }
 }
