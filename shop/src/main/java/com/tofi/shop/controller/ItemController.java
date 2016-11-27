@@ -1,8 +1,9 @@
 package com.tofi.shop.controller;
 
 import com.tofi.shop.domain.Item;
-import com.tofi.shop.service.CategoryService;
+import com.tofi.shop.service.ItemCategoryService;
 import com.tofi.shop.service.ItemService;
+import com.tofi.shop.service.ItemStatusService;
 import com.tofi.shop.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,31 +23,35 @@ public class ItemController {
     private static final Logger LOG = LogManager.getLogger(ItemController.class);
 
     private ItemService itemService;
-    private CategoryService categoryService;
+    private ItemCategoryService itemCategoryService;
+    private ItemStatusService itemStatusService;
 
     @Inject
-    public ItemController(ItemService itemService, CategoryService categoryService) {
+    public ItemController(ItemService itemService,
+                          ItemCategoryService itemCategoryService,
+                          ItemStatusService itemStatusService) {
         this.itemService = itemService;
-        this.categoryService = categoryService;
+        this.itemCategoryService = itemCategoryService;
+        this.itemStatusService = itemStatusService;
     }
 
     @RequestMapping("/add")
     public String showAddItemPage(Model model) throws ServiceException {
         model.addAttribute("operation", "add");
         model.addAttribute("item", new Item());
-        model.addAttribute("categoriesList", categoryService.findAll());
+        model.addAttribute("categoriesList", itemCategoryService.findAll());
+        model.addAttribute("statusList", itemStatusService.findAll());
         return "edit-item";
     }
 
     @RequestMapping(value = "/add/save", method = RequestMethod.POST)
-    public String saveNewlyCreatedItem(@ModelAttribute("item")
-                                               Item item,
+    public String saveNewlyCreatedItem(@ModelAttribute("item") Item item,
                                        BindingResult bindingResult)
             throws ServiceException {
         LOG.debug("Item to create: " + item);
         int id = itemService.create(item);
         LOG.debug("Created itemId: " + id);
-        return "redirect:/items-list";
+        return "redirect:/";
     }
 
     @RequestMapping("/{id}/edit")
@@ -58,7 +63,8 @@ public class ItemController {
             return "redirect:/error";
         }
         model.addAttribute("item", item);
-        model.addAttribute("categoriesList", categoryService.findAll());
+        model.addAttribute("categoriesList", itemCategoryService.findAll());
+        model.addAttribute("statusList", itemStatusService.findAll());
         return "edit-item";
     }
 
@@ -67,11 +73,12 @@ public class ItemController {
                                        @ModelAttribute("item") Item item,
                                        BindingResult bindingResult)
             throws ServiceException {
-        LOG.debug("ExtendedNews to update(id=" + id + "): " + item);
+        LOG.debug("Item to update(id=" + id + "): " + item);
+
         if (bindingResult.hasErrors()) {
             LOG.debug("There are binding errors:" + bindingResult.getAllErrors());
         }
         itemService.update(item);
-        return "redirect:/admin/item/" + item.getId() + "/view";
+        return "redirect:/";
     }
 }

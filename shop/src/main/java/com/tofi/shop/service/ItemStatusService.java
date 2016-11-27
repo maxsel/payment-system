@@ -1,28 +1,27 @@
 package com.tofi.shop.service;
 
-import com.tofi.shop.domain.Item;
-import com.tofi.shop.domain.ItemCategory;
-import org.springframework.stereotype.Service;
+import com.tofi.shop.domain.ItemStatus;
 
 import java.util.List;
 
-public interface CategoryService {
+public interface ItemStatusService {
+
     /**
      * Creates new item.
      *
-     * @param item item to create.
+     * @param itemStatus item to create.
      * @return id of created item.
      * @throws ServiceException if an error occurred when performing operation
      */
-    Long create(ItemService item) throws ServiceException;
+    Integer create(ItemStatus itemStatus) throws ServiceException;
 
     /**
      * Edits existing item by id.
      *
-     * @param item item to update.
+     * @param itemStatus item to update.
      * @throws ServiceException if an error occurred when performing operation
      */
-    void update(ItemService item) throws ServiceException;
+    void update(ItemStatus itemStatus) throws ServiceException;
 
     /**
      * Deletes item by id.
@@ -38,7 +37,7 @@ public interface CategoryService {
      * @return {@link List} of items.
      * @throws ServiceException if an error occurred when performing operation
      */
-    List<ItemCategory> findAll() throws ServiceException;
+    List<ItemStatus> findAll() throws ServiceException;
 
     /**
      * Retrieves an item with the given id.
@@ -47,5 +46,5 @@ public interface CategoryService {
      * @return an item with the given id.
      * @throws ServiceException if an error occurred when performing operation
      */
-    ItemCategory findById(Integer id) throws ServiceException;
+    ItemStatus findById(Integer id) throws ServiceException;
 }

@@ -1,24 +1,17 @@
 package com.tofi.shop.controller;
 
-import com.tofi.shop.domain.Item;
-import com.tofi.shop.domain.ItemCategory;
-import com.tofi.shop.domain.User;
+import com.tofi.shop.domain.*;
 import com.tofi.shop.dto.ajax.ItemAction;
 import com.tofi.shop.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/items-list")
@@ -26,33 +19,53 @@ public class ItemsListController {
     private static final Logger LOG = LogManager.getLogger(ItemsListController.class);
 
     private final ItemService itemService;
-    private final CategoryService categoryService;
+    private final ItemCategoryService itemCategoryService;
     private final CartService cartService;
     private final UserService userService;
+    private final UserRoleService userRoleService;
     private final BankService bankService;
+    private final ItemStatusService itemStatusService;
+    private final UserRole ROLE_ADMIN;
+    private final UserRole ROLE_USER;
+    private final ItemStatus AVAILABLE;
+    private final ItemStatus NOT_AVAILABLE;
+
 
     @Inject
-    public ItemsListController(ItemService itemService, CategoryService categoryService,
-                               CartService cartService, UserService userService, BankService bankService) {
-        Assert.notNull(itemService, "ItemService must be not null!");
-        Assert.notNull(categoryService, "CategoryService must be not null!");
-        Assert.notNull(cartService, "CartServicec must be not null");
-        Assert.notNull(bankService, "BankService must be not null");
+    public ItemsListController(ItemService itemService, ItemCategoryService itemCategoryService,
+                               CartService cartService, UserService userService, BankService bankService,
+                               UserRoleService userRoleService, ItemStatusService itemStatusService) throws ServiceException {
         this.cartService = cartService;
         this.itemService = itemService;
-        this.categoryService = categoryService;
+        this.itemCategoryService = itemCategoryService;
         this.userService = userService;
         this.bankService = bankService;
+        this.userRoleService = userRoleService;
+        this.itemStatusService = itemStatusService;
+        ROLE_ADMIN = userRoleService.findById(1);
+        ROLE_USER = userRoleService.findById(2);
+        AVAILABLE = itemStatusService.findById(1);
+        NOT_AVAILABLE = itemStatusService.findById(2);
     }
 
     @ModelAttribute("items")
     public List<Item> populateItemsList() throws ServiceException {
-        return new LinkedList<>(itemService.findAll());
+
+        if (userService.getAuthenticatedUser() != null &&
+                userService.getAuthenticatedUser().getRoles().contains(ROLE_ADMIN)) {
+            return itemService.findAll();
+        } else {
+            return itemService
+                    .findAll()
+                    .stream()
+                    .filter(i -> i.getStatus().equals(AVAILABLE))
+                    .collect(Collectors.toList());
+        }
     }
 
     @ModelAttribute("categories")
     public List<ItemCategory> populateCategoriesList() throws ServiceException {
-        return new LinkedList<>(categoryService.findAll());
+        return itemCategoryService.findAll();
     }
 
     @ModelAttribute("item")
