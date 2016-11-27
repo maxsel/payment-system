@@ -9,26 +9,26 @@
 
 <h1>Items list</h1>
 <div>
-    <c:forEach items="${items}" var="item">
-        <div>
-            <div class = "panel panel-success" id="item_${item.id}">
-                <div class="panel-heading"><h3>${item.title}</h3></div>
-                <div class = "panel-body">
-                    <ul class="list-inline">
-                        <li><img width="150" src="resources/info?itemId=${item.id}"/></li>
-                        <li>${item.id}</li>
-                        <li>${item.description}</li>
-                        <security:authorize access="hasRole('ROLE_USER')">
-                            <li class="pull-right">
-                                <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${item.id})">+</button>
-                            </li>
-                        </security:authorize>
-                    </ul>
+    <ul class="list-inline">
+        <c:forEach items="${items}" var="item">
+            <li>
+                <div class = "panel panel-success " id="item_${item.id}">
+                    <div class="panel-heading"><h3>${item.title}</h3></div>
+                    <div class = "panel-body">
+                        <ul class="list-inline">
+                            <li><img width="150" src="resources/info?itemId=${item.id}"/></li>
+                            <li>${item.description}</li>
+                            <security:authorize access="hasRole('ROLE_USER')">
+                                <li class="pull-right">
+                                    <button type="button" class="btn btn-primary btn-circle btn-lg" onclick="addToCart(${item.id})">+</button>
+                                </li>
+                            </security:authorize>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </c:forEach>
-
+            </li>
+        </c:forEach>
+    </ul>
     <script>
         $(document).ready(()=> {
 
