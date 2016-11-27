@@ -11,7 +11,7 @@
         <property name="name" type="string">
             <column name="CAT_NAME" sql-type="nvarchar2" not-null="true"/>
         </property>
-        <bag name="items" cascade="delete" table="items" inverse="true" lazy="false">
+        <bag name="items" cascade="delete" table="item" inverse="true" lazy="false">
             <key column="item_cat_id" />
             <one-to-many class="com.tofi.shop.domain.Item"/>
         </bag>

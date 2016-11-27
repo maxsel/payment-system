@@ -1,7 +1,6 @@
 package com.tofi.shop.dao;
 
-/**
- * Created by maxsel on 27.11.16.
- */
-public interface ItemStatusDAO {
+import com.tofi.shop.domain.ItemStatus;
+
+public interface ItemStatusDAO extends GenericDAO<Integer, ItemStatus> {
 }

@@ -24,6 +24,7 @@ insert into user_has_role(user_id, role_id) values(1, 1);
 insert into user_has_role(user_id, role_id) values(2, 2);
 
 insert into item_category(cat_id, cat_name) values(1, 'UNSORTED');
+insert into item_category(cat_id, cat_name) values(2, 'FOOD');	
 
 insert into item_status(status_id, status_name) values(1, 'AVAILABLE');
 insert into item_status(status_id, status_name) values(2, 'NOT_AVAILABLE');

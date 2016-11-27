@@ -12,7 +12,6 @@ public class Item implements Serializable {
     private byte[] image;
     private ItemCategory category;
     private ItemStatus status;
-    private Set<ItemInCart> itemsInCart;
 
     public Item() {
     }
@@ -73,14 +72,6 @@ public class Item implements Serializable {
 
     public void setStatus(ItemStatus status) {
         this.status = status;
-    }
-
-    public Set<ItemInCart> getItemsInCart() {
-        return itemsInCart;
-    }
-
-    public void setItemsInCart(Set<ItemInCart> itemsInCart) {
-        this.itemsInCart = itemsInCart;
     }
 
     public byte[] getImage() {

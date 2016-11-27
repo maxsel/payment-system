@@ -1,7 +1,7 @@
-package com.tofi.shop.controller;
+package com.tofi.shop.controller.editor;
 
 import com.tofi.shop.domain.ItemCategory;
-import com.tofi.shop.service.impl.ItemCategoryServiceImpl;
+import com.tofi.shop.service.ItemCategoryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -9,14 +9,14 @@ import java.beans.PropertyEditorSupport;
 
 public class ItemCategoryEditor extends PropertyEditorSupport {
 
-    private ItemCategoryServiceImpl itemCategoryService;
+    private ItemCategoryService itemCategoryService;
 
     private static final Logger LOG = LogManager.getLogger(ItemCategoryEditor.class);
 
     public ItemCategoryEditor() {
     }
 
-    public ItemCategoryEditor(ItemCategoryServiceImpl itemCategoryService) {
+    public ItemCategoryEditor(ItemCategoryService itemCategoryService) {
         this.itemCategoryService = itemCategoryService;
     }
 
