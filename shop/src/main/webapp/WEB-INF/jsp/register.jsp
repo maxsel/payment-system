@@ -46,6 +46,7 @@
                                 <button type="submit">Join now</button>
                                 <p>By clicking Join now, you agree to our User Agreement, Privacy Policy, and Cookie Policy.</p>
                             </form:form>
+                            ${error}
                         </div>
                     </div>
                 </div>

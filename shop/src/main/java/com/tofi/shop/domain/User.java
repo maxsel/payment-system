@@ -1,10 +1,12 @@
 package com.tofi.shop.domain;
 
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Set;
 
 public class User {
     private int id;
+    @Size(min=2, max=30)
     private String login;
     private String password;
     private String cardId;
