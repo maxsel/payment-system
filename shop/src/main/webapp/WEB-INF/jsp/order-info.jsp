@@ -8,14 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <c:url var="rootUrl" value="/"/>
-<html>
-<head>
-    <title>Title</title>
-    ${orderCode}
 
-    <a class="btn-default btn" href="${rootUrl}user/orders"></a>
-</head>
-<body>
-
-</body>
-</html>
+<div>
+    <pre>Your order code: ${orderCode}</pre>
+</div>
+<div>
+    <a class="btn btn-default" href="${rootUrl}user/orders">OK</a>
+</div>
