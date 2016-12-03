@@ -16,8 +16,8 @@ import java.util.Map;
 
 @Service
 public class BankServiceImpl implements BankService{
-//    private final String _bankServer = "http://localhost";
-    private final String _bankServer = "http://192.168.43.67";
+    private final String _bankServer = "http://localhost";
+//    private final String _bankServer = "http://192.168.43.67";
     private final String _bankServerPort = "8081";
     private final String _api = "/tofi-bank/rest";
     private final String _shopCardNumber = "CTOXYEB";

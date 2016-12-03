@@ -47,9 +47,9 @@
 
             window.updateItem = (itemId,model) => {
                 $('#' + itemId).text(model.itemsCount);
-                $('#discount_cost').text(model.totalPriceWithDiscount);
-                $('#discount').text(model.discount);
-                $('#total_cost').text(model.totalPrice);
+                $('#discount_cost').text("Cost with discount: " + model.totalPriceWithDiscount);
+                $('#discount').text("Your current discount: " + model.discount + "%");
+                $('#total_cost').text("Total cost: " + model.totalPrice);
             };
 
             window.removeFromCart = function (itemId) {

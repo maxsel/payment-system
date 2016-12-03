@@ -100,11 +100,12 @@ public class UserController {
         User user = userService.getAuthenticatedUser();
         LOG.debug("--- MAKING ORDER ---");
 
+        // not enough money
         if (!bankService.checkAmountOfMoney(user.getCardId(), cartService.getTotalPrice()))
-            return "error";
-
+            return "error-money";
+        // error transfer
         if (!bankService.pay(user.getCardId(), cvv, cartService.getTotalPrice()))
-            return "error";
+            return "error-transfer";
 
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
