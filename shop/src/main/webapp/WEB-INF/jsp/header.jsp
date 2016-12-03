@@ -19,7 +19,7 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
+            <li><a href="/tofi-shop/about">About Us</a></li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Language<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="?lang=en_US">EN</a>
