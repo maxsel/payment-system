@@ -15,12 +15,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.HashSet;
+import java.util.regex.Pattern;
 
 @Controller
 public class WelcomeController {
@@ -67,13 +70,28 @@ public class WelcomeController {
     }
 
     @RequestMapping("/signup")
-    public String signUp(@ModelAttribute("newUser") User user,
-                         BindingResult bindingResult) throws ServiceException {
+    public String signUp(@Valid @ModelAttribute("newUser") User user,
+                         BindingResult bindingResult, Model model) throws ServiceException {
         try {
-            if (bindingResult.hasErrors()) {
-                LOG.debug("There are binding errors:" + bindingResult.getAllErrors());
-                return "edit-authors";
+            int loginLength = user.getLogin().length();
+            int passwordLength = user.getPassword().length();
+            String vardId = user.getCardId();
+            LOG.debug(loginLength);
+            if (2 > loginLength || loginLength > 50) {
+                model.addAttribute("error", "Length of login has to be between 2 and 50");
+                return "register";
             }
+            if (5 > passwordLength || passwordLength > 50) {
+                model.addAttribute("error", "Length of password has to be between 5 and 50");
+                return "register";
+            }
+            String regex = "\\b(4[0-9]{12}(?:[0-9]{3})?)\\b";
+
+            if (!user.getCardId().matches(regex)){
+                model.addAttribute("error", "invalid card number");
+                return "register";
+            }
+
             user.setRoles(new HashSet<>());
             user.getRoles().add(ROLE_USER);
             userService.create(user);
