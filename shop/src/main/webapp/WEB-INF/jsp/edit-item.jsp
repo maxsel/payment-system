@@ -10,34 +10,57 @@
     <c:url var="rootUrl" value="/admin/items/${item.id}/edit"/>
 </c:if>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-1">
-            <div class="form-body">
-                <div class="tab-content">
-                    <div id="sectionA" class="tab-pane fade in active">
-                        <div class="innter-form">
-                            <form:form action="${rootUrl}/save" method="post" modelAttribute="item" class="sa-innate-form">
-                                <form:hidden path="id" />
-                                <label>Title</label>
-                                <form:input path="title" type="text" name="title"/>
-                                <label>Description</label>
-                                <form:input path="description" type="text" name="description"/>
-                                <label>Price</label>
-                                <form:input path="price" type="text" name="price"/>
-                                <form:hidden path="image" />
-                                <form:select path="category">
-                                    <form:options itemLabel="name" items="${categoriesList}" itemValue="id"/>
-                                </form:select>
-                                <form:select path="status">
-                                    <form:options itemLabel="name" items="${statusList}" itemValue="id"/>
-                                </form:select>
-                                <button type="submit">Save</button>
-                            </form:form>
-                        </div>
-                    </div>
+
+<form:form action="${rootUrl}/save" method="post" modelAttribute="item" class="sa-innate-form">
+
+    <ul class="list-inline">
+        <li>
+            <div class="panel panel-success">
+                <div class="panel-heading">Title</div>
+                <div class="panel-body">
+                    <form:input path="title" type="text" name="title" class="form-control"/>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+        </li>
+        <li>
+            <div class="panel panel-success">
+                <div class="panel-heading">Description</div>
+                <div class="panel-body">
+                    <form:input path="description" type="text" name="description" class="form-control"/>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="panel panel-success">
+                <div class="panel-heading">Price</div>
+                <div class="panel-body">
+                    <form:input path="price" type="text" name="price" class="form-control"/>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="panel panel-success">
+                <div class="panel-heading">Category</div>
+                <div class="panel-body">
+                    <form:select path="category" class="form-control">
+                        <form:options itemLabel="name" items="${categoriesList}" itemValue="id" class="form-control"/>
+                    </form:select>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="panel panel-success">
+                <div class="panel-heading">Category</div>
+                <div class="panel-body">
+                    <form:select path="status" class="form-control">
+                        <form:options itemLabel="name" items="${statusList}" itemValue="id" class="form-control"/>
+                    </form:select>
+                </div>
+            </div>
+        </li>
+    </ul>
+
+    <form:hidden path="image" />
+    <form:hidden path="id" />
+    <button type="submit" class="btn btn-danger">Save</button>
+</form:form>
