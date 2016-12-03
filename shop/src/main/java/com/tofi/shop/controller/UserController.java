@@ -88,12 +88,12 @@ public class UserController {
         LOG.debug(cvv);
         User user = userService.getAuthenticatedUser();
         if (bankService.checkCurrency(user.getCardId()))
-            return showOrderPage(cvv);
+            return showOrderPage(cvv, model);
         return "currency-confirm";
     }
 
     @RequestMapping("/order")
-    public String showOrderPage(@RequestParam("cvv") String cvv) throws ServiceException, IOException {
+    public String showOrderPage(@RequestParam("cvv") String cvv, Model model) throws ServiceException, IOException {
         // TODO: payment stuff, interaction with bank
 
         LOG.debug(cvv);
@@ -133,6 +133,8 @@ public class UserController {
             itemInOrderService.create(itemInOrder);
         }
         cartService.clear(userService.getAuthenticatedUser());
-        return "redirect:/user/orders";
+
+        model.addAttribute("orderCode", order.getUniqueCode());
+        return "order-info";
     }
 }
