@@ -10,12 +10,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin/items")
@@ -46,9 +45,21 @@ public class ItemController {
 
     @RequestMapping(value = "/add/save", method = RequestMethod.POST)
     public String saveNewlyCreatedItem(@ModelAttribute("item") Item item,
+                                       @RequestParam("file") MultipartFile file,
                                        BindingResult bindingResult)
-            throws ServiceException {
+            throws ServiceException, IOException {
         LOG.debug("Item to create: " + item);
+
+        LOG.debug("File:" + file.getName());
+        LOG.debug("ContentType:" + file.getContentType());
+
+        if (bindingResult.hasErrors()) {
+            LOG.debug("There are binding errors:" + bindingResult.getAllErrors());
+        }
+
+        item.setImage(file.getBytes());
+        item.setImageFilename(file.getOriginalFilename());
+        item.setImageFormat(file.getContentType());
         int id = itemService.create(item);
         LOG.debug("Created itemId: " + id);
         return "redirect:/";
@@ -71,13 +82,21 @@ public class ItemController {
     @RequestMapping(value = "/{id}/edit/save", method = RequestMethod.POST)
     public String saveItemAfterEditing(@PathVariable("id") long id,
                                        @ModelAttribute("item") Item item,
+                                       @RequestParam("file") MultipartFile file,
                                        BindingResult bindingResult)
-            throws ServiceException {
+            throws ServiceException, IOException {
         LOG.debug("Item to update(id=" + id + "): " + item);
+
+        LOG.debug("File:" + file.getName());
+        LOG.debug("ContentType:" + file.getContentType());
 
         if (bindingResult.hasErrors()) {
             LOG.debug("There are binding errors:" + bindingResult.getAllErrors());
         }
+
+        item.setImage(file.getBytes());
+        item.setImageFilename(file.getOriginalFilename());
+        item.setImageFormat(file.getContentType());
         itemService.update(item);
         return "redirect:/";
     }

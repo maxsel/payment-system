@@ -10,6 +10,8 @@ public class Item implements Serializable {
     private String description;
     private Integer price;
     private byte[] image;
+    private String imageFormat;
+    private String imageFilename;
     private ItemCategory category;
     private ItemStatus status;
 
@@ -80,6 +82,22 @@ public class Item implements Serializable {
 
     public void setImage(byte[] image) {
         this.image = image;
+    }
+
+    public String getImageFormat() {
+        return imageFormat;
+    }
+
+    public void setImageFormat(String imageFormat) {
+        this.imageFormat = imageFormat;
+    }
+
+    public String getImageFilename() {
+        return imageFilename;
+    }
+
+    public void setImageFilename(String imageFilename) {
+        this.imageFilename = imageFilename;
     }
 
     @Override

@@ -34,7 +34,7 @@
                     </div>
                     <div class = "panel-body">
                         <ul class="list-inline">
-                            <li><img height="150" width="200" src="resources/info?itemId=${item.id}"/></li>
+                            <li><img height="150" width="200" src="resources/image/${item.id}"/></li>
                             <li>${item.description}</li>
                             <security:authorize access="hasRole('ROLE_USER')">
                                 <li class="pull-right">

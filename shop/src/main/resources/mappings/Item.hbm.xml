@@ -18,7 +18,13 @@
             <column name="ITEM_PRICE" />
         </property>
         <property name="image" type="binary">
-            <column name="ITEM_IMG" not-null="false" sql-type="blob"/>
+            <column name="ITEM_IMG" not-null="false" sql-type="longblob"/>
+        </property>
+        <property name="imageFormat" type="string">
+            <column name="IMG_FORMAT" />
+        </property>
+        <property name="imageFilename" type="string">
+            <column name="IMG_FILENAME" />
         </property>
         <many-to-one name="category" class="ItemCategory" not-null="true" lazy="false">
             <column name="item_cat_id" />

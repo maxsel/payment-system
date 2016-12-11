@@ -11,7 +11,9 @@
 </c:if>
 
 
-<form:form action="${rootUrl}/save" method="post" modelAttribute="item" class="sa-innate-form">
+<form:form action="${rootUrl}/save?${_csrf.parameterName}=${_csrf.token}"
+           method="post" modelAttribute="item" enctype="multipart/form-data"
+           class="sa-innate-form" >
 
     <ul class="list-inline">
         <li>
@@ -58,9 +60,14 @@
                 </div>
             </div>
         </li>
+        <li>
+        <li>
+            <img height="150" width="200" src="${pageContext.request.contextPath}/resources/image/${item.id}"/>
+            <input id="file" name="file" type="file" />
+            <%--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
+        </li>
     </ul>
 
-    <form:hidden path="image" />
     <form:hidden path="id" />
     <button type="submit" class="btn btn-danger">Save</button>
 </form:form>
