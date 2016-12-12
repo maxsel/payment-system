@@ -8,6 +8,9 @@
 <c:url var="rootUrl" value="/"/>
 
 <h1>Items list</h1>
+<div>
+    Total Price: <div id="totalPrice"></div>
+</div>
 
 <div class="text-center">
     <security:authorize access="hasRole('ROLE_ADMIN')">
@@ -23,7 +26,8 @@
                                 <h3>${item.title}</h3>
                             </li>
                             <li class="pull-right">
-                                ${item.price} BYN
+                                <div>${item.price} BYN</div>
+                                <div id="count_${item.id}">count: 0</div>
                             </li>
                             <security:authorize access="hasRole('ROLE_ADMIN')">
                                 <li class="pull-right">
@@ -73,6 +77,8 @@
                         let item = $('#item_' + itemId);
                         item.removeClass('panel-success');
                         item.addClass('panel-danger');
+                        $('#count_'+itemId).text('count: ' + res.itemsCount);
+                        $('#totalPrice').text(res.totalPriceWithDiscount);
                     }
                 });
             };
