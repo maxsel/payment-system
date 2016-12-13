@@ -29,12 +29,14 @@ public class ItemsListController {
     private final UserRole ROLE_USER;
     private final ItemStatus AVAILABLE;
     private final ItemStatus NOT_AVAILABLE;
+    private final MailService mailService;
 
 
     @Inject
     public ItemsListController(ItemService itemService, ItemCategoryService itemCategoryService,
                                CartService cartService, UserService userService, BankService bankService,
-                               UserRoleService userRoleService, ItemStatusService itemStatusService) throws ServiceException {
+                               UserRoleService userRoleService, ItemStatusService itemStatusService,
+                               MailService mailService) throws ServiceException {
         this.cartService = cartService;
         this.itemService = itemService;
         this.itemCategoryService = itemCategoryService;
@@ -42,6 +44,7 @@ public class ItemsListController {
         this.bankService = bankService;
         this.userRoleService = userRoleService;
         this.itemStatusService = itemStatusService;
+        this.mailService = mailService;
         ROLE_ADMIN = userRoleService.findById(1);
         ROLE_USER = userRoleService.findById(2);
         AVAILABLE = itemStatusService.findById(1);
