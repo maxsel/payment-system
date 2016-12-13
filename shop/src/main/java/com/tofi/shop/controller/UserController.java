@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.inject.Inject;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -82,10 +84,23 @@ public class UserController {
     }
 
     @RequestMapping("/checkOrder")
-    public String checkOrder(@RequestParam(name = "cvv")String cvv, Model model) throws ServiceException, IOException {
+    public String checkOrder(@RequestParam(name = "cvv")String cvv,
+                             @RequestParam(name = "Month") String month,
+                             @RequestParam(name = "Year") String year,
+                             Model model) throws ServiceException, IOException {
         model.addAttribute("cvv", cvv);
         LOG.debug("CVV - check order");
         LOG.debug(cvv);
+        LOG.debug(month);
+        LOG.debug(2000+Integer.parseInt(year));
+        LOG.debug(LocalDate.now().getYear());
+        LOG.debug(LocalDate.now().getMonth());
+        LOG.debug(LocalDate.now().getMonth());
+        int yearN = 2000+Integer.parseInt(year);
+        int monthN = Integer.parseInt(month)-1;
+        if (LocalDate.now().getYear() > yearN || (LocalDate.now().getYear()==yearN && LocalDate.now().getMonthValue() > monthN)){
+            return showPurchasePage(model);
+        }
         User user = userService.getAuthenticatedUser();
         if (bankService.checkCurrency(user.getCardId()))
             return showOrderPage(cvv, model);

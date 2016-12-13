@@ -24,6 +24,8 @@
         </c:forEach>
 
         <input type="text" value="CVV" name="cvv">
+        <input type="text" value="Month" name="Month">
+        <input type="text" value="Year" name="Year">
         <c:if test="${!empty cart_items}">
             <input type="submit" value="Order">
         </c:if>
