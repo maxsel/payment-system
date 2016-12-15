@@ -34,11 +34,13 @@ public class UserController {
     private ItemInOrderService itemInOrderService;
     private OrderHistoryService orderHistoryService;
     private BankService bankService;
+    private MailService mailService;
 
     @Inject
     public UserController(UserService userService, CartService cartService, OrderService orderService,
                           OrderStatusService orderStatusService, ItemInOrderService itemInOrderService,
-                          OrderHistoryService orderHistoryService, BankService bankService) {
+                          OrderHistoryService orderHistoryService, BankService bankService,
+                          MailService mailService) {
         this.userService = userService;
         this.cartService = cartService;
         this.orderService = orderService;
@@ -46,6 +48,7 @@ public class UserController {
         this.itemInOrderService = itemInOrderService;
         this.orderHistoryService = orderHistoryService;
         this.bankService = bankService;
+        this.mailService = mailService;
     }
 
     @ModelAttribute("user")
@@ -105,6 +108,13 @@ public class UserController {
         if (bankService.checkCurrency(user.getCardId()))
             return showOrderPage(cvv, model);
         return "currency-confirm";
+    }
+
+    @RequestMapping("/sendMail")
+    public void sendMail(@RequestParam("mail") String mail) throws ServiceException {
+        User user = userService.getAuthenticatedUser();
+        String code = user.getOrders().get(user.getOrders().size()-1).getUniqueCode();
+        mailService.sendCode(mail, code);
     }
 
     @RequestMapping("/order")
