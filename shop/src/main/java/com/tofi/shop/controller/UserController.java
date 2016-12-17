@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/user")
@@ -110,7 +111,7 @@ public class UserController {
         return "currency-confirm";
     }
 
-    @RequestMapping("/sendMail")
+    @PostMapping("/sendMail")
     public void sendMail(@RequestParam("mail") String mail) throws ServiceException {
         User user = userService.getAuthenticatedUser();
         String code = user.getOrders().get(user.getOrders().size()-1).getUniqueCode();

@@ -17,10 +17,24 @@
         <div><a class="btn btn-default" href="${rootUrl}user/orders">OK</a></div>
     </li>
     <li>
-        <div class="btn btn-success" onClick="print()">print</div>
+        <div class="btn btn-success" onClick="print()">print code</div>
     </li>
     <li>
-        <div class="btn btn-success" onClick="emailMe()">email me</div>
+        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#login-modal">email me</a>
+
+        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="loginmodal-container">
+                    <h1>Please enter your email</h1><br>
+                    <form action="<c:url value="/j_spring_security_check" />">
+                        <input type="text" name="email" placeholder="email" id="email" value="email@mailme.com">
+                        <input type="button" name="login" class="login loginmodal-submit" value="email me" onClick="emailMe()">
+
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
     </li>
 </ul>
 
@@ -32,6 +46,7 @@
 
     window.emailMe = function() {
         console.log('emailMe');
+        sendEmail($('#email').val());
     };
 
     window.printCode = function(div_id) {
@@ -42,5 +57,29 @@
         WinPrint.focus();
         WinPrint.print();
         WinPrint.close();
-    }
+    };
+
+    window.sendEmail = function(email) {
+        console.log(email);
+        var csrfParameter = '${_csrf.parameterName}';
+        var csrfToken = '${_csrf.token}';
+        var csrfHeader = '${_csrf.headerName}';
+
+        var data = {};
+        var headers = {};
+
+        data[csrfParameter] = csrfToken;
+        headers[csrfHeader] = csrfToken;
+
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: '/tofi-shop/user/sendMail?mail=' + email,
+            data: data,
+            headers: headers,
+            success: function (res) {
+                console.log(res);
+            }
+        });
+    };
 </script>
