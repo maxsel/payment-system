@@ -23,11 +23,67 @@
             </div>
         </c:forEach>
 
-        <input type="text" value="CVV" name="cvv">
-        <input type="text" value="Month" name="Month">
-        <input type="text" value="Year" name="Year">
+        <input type="text" value="CVV" name="cvv" id="cvv">
+        <input type="text" value="Month" name="Month" id="month">
+        <input type="text" value="Year" name="Year" id="year">
         <c:if test="${!empty cart_items}">
-            <input type="submit" value="Order">
+            <input type="submit" value="Order" id="order" class="btn btn-success">
         </c:if>
     </form:form>
 </div>
+<script>
+    $('document').ready(function() {
+        window.checkFields = function() {
+            let order = $('#order');
+            let cvv = $('#cvv').val().replace(/\s/g, '');;
+            let month = $('#month').val().replace(/\s/g, '');;
+            let year = $('#year').val().replace(/\s/g, '');;
+
+            if(!isCVVValid(cvv) || !isMonthValid(month) || !isYearValid(year)) {
+                order.prop('disabled',true);
+            } else {
+                order.prop('disabled',false);
+            }
+        };
+
+        window.isCVVValid = function(value) {
+            if(value === '') {
+                return false;
+            } else {
+                return true;
+            }
+        };
+
+        window.isYearValid = function(value) {
+            var reg = new RegExp("^[0-9]+$");
+            if (!reg.test(value)) {
+                return false;
+            }
+            return Number.isInteger(parseInt(value));
+        };
+
+        window.isMonthValid = function(value) {
+            var reg = new RegExp("^[0-9]+$");
+            if (!reg.test(value)) {
+                return false;
+            }
+            value = parseInt(value);
+            if(Number.isInteger(value)) {
+                if(value > 0 && value < 13) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        };
+
+        $('#cvv').change(() => {checkFields();});
+        $('#month').change(() => {checkFields();});
+        $('#year').change(() => {checkFields();});
+
+        checkFields();
+
+    });
+</script>
