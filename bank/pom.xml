@@ -49,7 +49,7 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <server>TomcatServer</server>
-                    <path>/tofi-shop</path>
+                    <path>/tofi-bank</path>
                 </configuration>
             </plugin>
 
