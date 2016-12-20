@@ -36,12 +36,13 @@ public class UserController {
     private OrderHistoryService orderHistoryService;
     private BankService bankService;
     private MailService mailService;
+    private final DiscountService discountService;
 
     @Inject
     public UserController(UserService userService, CartService cartService, OrderService orderService,
                           OrderStatusService orderStatusService, ItemInOrderService itemInOrderService,
                           OrderHistoryService orderHistoryService, BankService bankService,
-                          MailService mailService) {
+                          MailService mailService, DiscountService discountService) {
         this.userService = userService;
         this.cartService = cartService;
         this.orderService = orderService;
@@ -50,6 +51,7 @@ public class UserController {
         this.orderHistoryService = orderHistoryService;
         this.bankService = bankService;
         this.mailService = mailService;
+        this.discountService = discountService;
     }
 
     @ModelAttribute("user")
@@ -133,10 +135,16 @@ public class UserController {
         if (!bankService.pay(user.getCardId(), cvv, cartService.getTotalPrice()))
             return "error-transfer";
 
+        long totalCost = cartService.getItemsInCart(userService.getAuthenticatedUser())
+                .stream()
+                .mapToLong(i -> i.getAmount()*i.getItem().getPrice())
+                .sum();
+
         Order order = new Order();
         order.setUser(userService.getAuthenticatedUser());
         order.setUniqueCode(UUID.randomUUID().toString().substring(0, 8));
-        order.setInstantDiscount(user.getDiscount());
+        int discount = discountService.getDiscount(user, totalCost);
+        order.setInstantDiscount(discount);
         Integer id = orderService.create(order);
         order = orderService.findById(id);
 
@@ -154,8 +162,8 @@ public class UserController {
             itemInOrder.setOrder(order);
             itemInOrder.setItem(itemInCart.getItem());
             itemInOrder.setAmount(itemInCart.getAmount());
-            double discount = userService.getAuthenticatedUser().getDiscount()/100.0;
-            itemInOrder.setInstantPrice((int)(itemInCart.getItem().getPrice()*(1-discount)));
+            LOG.debug(itemInCart.getItem().getPrice()*itemInCart.getAmount()*(1-discount/100f));
+            itemInOrder.setInstantPrice((int)(itemInCart.getItem().getPrice()*itemInCart.getAmount()*(1-discount/100f)));
             itemInOrderService.create(itemInOrder);
         }
         cartService.clear(userService.getAuthenticatedUser());

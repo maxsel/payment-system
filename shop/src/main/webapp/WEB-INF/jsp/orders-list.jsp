@@ -41,7 +41,7 @@
                                 <div class="panel-heading" style="height: 40px;"><h5>${item.item.title}</h5></div>
                                 <ul class="list-inline list-cell">
                                     <li>
-                                        <pre>${item.amount} x ${item.item.price} BYN = ${item.instantPrice} BYN</pre>
+                                        <pre>${item.amount} x ${item.item.price} BYN = ${item.instantPrice} BYN - ${order.instantDiscount}%</pre>
                                     </li>
                                 </ul>
                             </div>

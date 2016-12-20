@@ -1,13 +1,11 @@
 package com.tofi.shop.controller;
 
+import com.mysql.cj.api.log.Log;
 import com.tofi.shop.domain.Item;
 import com.tofi.shop.domain.ItemInCart;
 import com.tofi.shop.domain.User;
 import com.tofi.shop.dto.ajax.ItemAction;
-import com.tofi.shop.service.CartService;
-import com.tofi.shop.service.ItemService;
-import com.tofi.shop.service.ServiceException;
-import com.tofi.shop.service.UserService;
+import com.tofi.shop.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +19,14 @@ public class CartController {
     private final CartService cartService;
     private final ItemService itemService;
     private UserService userService;
+    private final DiscountService discountService;
 
     @Inject
-    public CartController(CartService cartService, ItemService itemService, UserService userService) {
+    public CartController(CartService cartService, ItemService itemService, UserService userService, DiscountService discountService) {
         this.cartService = cartService;
         this.itemService = itemService;
         this.userService = userService;
+        this.discountService = discountService;
     }
 
     @ModelAttribute("cart_items")
@@ -40,7 +40,7 @@ public class CartController {
                 .stream()
                 .mapToLong(i -> i.getAmount()*i.getItem().getPrice())
                 .sum();
-        long discount = userService.getAuthenticatedUser().getDiscount();
+        long discount = discountService.getDiscount(userService.getAuthenticatedUser(), totalCost);
         model.addAttribute("total_cost", totalCost);
         model.addAttribute("discount", discount);
         model.addAttribute("discount_cost", totalCost - totalCost*discount/100);
