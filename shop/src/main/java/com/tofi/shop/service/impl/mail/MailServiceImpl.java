@@ -1,4 +1,4 @@
-package com.tofi.shop.service.impl;
+package com.tofi.shop.service.impl.mail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -18,6 +18,7 @@ public class MailServiceImpl implements com.tofi.shop.service.MailService{
         message.setTo(mail);
         message.setSubject(Subject);
         message.setText(code);
+        message.setFrom("kirill2max@gmail.com");
         mailSender.send(message);
     }
 }
