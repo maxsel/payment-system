@@ -47,11 +47,11 @@
         };
 
         window.isCVVValid = function(value) {
-            if(value === '') {
-                return false;
-            } else {
+            let reg = new RegExp("^[0-9]{3}$");
+            if(reg.test(value)) {
                 return true;
             }
+            return false;
         };
 
         window.isYearValid = function(value) {
