@@ -11,7 +11,16 @@
     <div class="alert alert-success"><h1>Your Orders</h1></div>
     <c:forEach items="${orders}" var="order">
         <div class = "panel panel-success" id="item_${order.id}">
-            <div class="panel-heading"><h2>STATUS: ${order.status.name}</h2></div>
+            <div class="panel-heading">
+                <ul class="list-inline">
+                    <li>
+                        <h2>STATUS: ${order.status.name}</h2>
+                    </li>
+                    <li>
+                        <div>code: ${order.uniqueCode}</div>
+                    </li>
+                </ul>
+            </div>
             <div class = "panel-body">
                 <security:authorize access="hasRole('ROLE_ADMIN')">
                     <div class="panel">

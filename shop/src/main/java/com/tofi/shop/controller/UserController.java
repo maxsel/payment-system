@@ -105,11 +105,13 @@ public class UserController {
         int yearN = 2000+Integer.parseInt(year);
         int monthN = Integer.parseInt(month)-1;
         if (LocalDate.now().getYear() > yearN || (LocalDate.now().getYear()==yearN && LocalDate.now().getMonthValue() > monthN)){
+            model.addAttribute("error", "your cart is too old");
             return showPurchasePage(model);
         }
         User user = userService.getAuthenticatedUser();
-        if (bankService.checkCurrency(user.getCardId()))
+        if (bankService.checkCurrency(user.getCardId())) {
             return showOrderPage(cvv, model);
+        }
         return "currency-confirm";
     }
 

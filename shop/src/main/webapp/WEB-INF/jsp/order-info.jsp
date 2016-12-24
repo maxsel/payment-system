@@ -28,7 +28,7 @@
                     <h1>Please enter your email</h1><br>
                     <form action="<c:url value="/j_spring_security_check" />">
                         <input type="text" name="email" placeholder="email" id="email" value="email@mailme.com">
-                        <input type="button" name="login" class="login loginmodal-submit" value="email me" onClick="emailMe()">
+                        <input type="button" name="login" class="login loginmodal-submit" value="email me" id="button0" onClick="emailMe()">
 
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
@@ -46,7 +46,10 @@
 
     window.emailMe = function() {
         console.log('emailMe');
+        $('#button0').prop('disabled',true);
+        $('#button0').hide();
         sendEmail($('#email').val());
+
     };
 
     window.printCode = function(div_id) {

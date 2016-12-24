@@ -15,7 +15,7 @@
                 <div class="panel-heading"><h3>${cart_item.item.title}</h3></div>
                 <div class = "panel-body">
                     <ul class="list-inline">
-                        <li><img width="150" src="/tofi-shop/resources/info?itemId=${cart_item.item.id}"/></li>
+                        <li><img width="150" src="/tofi-shop/resources/image/${cart_item.item.id}"/></li>
                         <li>${cart_item.item.description}</li>
                         <li><h2>Amount: ${cart_item.amount}</h2></li>
                     </ul>
@@ -23,9 +23,16 @@
             </div>
         </c:forEach>
 
-        <input type="text" value="CVV" name="cvv" id="cvv">
-        <input type="text" value="Month" name="Month" id="month">
-        <input type="text" value="Year" name="Year" id="year">
+        <lable style="color: red">${error}</lable>
+        <br>
+        <label for="cvv">CVV</label>
+        <input type="text" name="cvv" id="cvv">
+        <br>
+        <label for="month">month</label>
+        <input type="text" name="Month" id="month">
+        <br>
+        <label for="year">year</label>
+        <input type="text" name="Year" id="year">
         <c:if test="${!empty cart_items}">
             <input type="submit" value="Order" id="order" class="btn btn-success">
         </c:if>
