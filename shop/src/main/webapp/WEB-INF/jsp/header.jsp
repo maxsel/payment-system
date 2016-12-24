@@ -19,13 +19,13 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="/tofi-shop/about">About Us</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Language<span class="caret"></span></a>
+            <!--li><a href="/tofi-shop/about">About Us</a></li-->
+            <!--li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Language<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="?lang=en_US">EN</a>
                     <li><a href="?lang=ru_RU">RU</a></li>
                 </ul>
-            </li>
+            </li-->
             <security:authorize access="hasRole('ROLE_USER')">
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">User Actions<span class="caret"></span></a>
                     <ul class="dropdown-menu">

@@ -18,7 +18,7 @@
     </security:authorize>
     <ul class="list-inline">
         <c:forEach items="${items}" var="item">
-            <li>
+            <li style="max-width: 350px;">
                 <div class = "panel panel-success " id="item_${item.id}">
                     <div class="panel-heading">
                         <ul class="list-inline">
